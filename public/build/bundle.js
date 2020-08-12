@@ -64,6 +64,10 @@ var app = (function () {
     function space() {
         return text(' ');
     }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
     function attr(node, attribute, value) {
         if (value == null)
             node.removeAttribute(attribute);
@@ -310,6 +314,19 @@ var app = (function () {
         dispatch_dev("SvelteDOMRemove", { node });
         detach(node);
     }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ["capture"] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev("SvelteDOMAddEventListener", { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev("SvelteDOMRemoveEventListener", { node, event, handler, modifiers });
+            dispose();
+        };
+    }
     function attr_dev(node, attribute, value) {
         attr(node, attribute, value);
         if (value == null)
@@ -340,6 +357,46 @@ var app = (function () {
         $capture_state() { }
         $inject_state() { }
     }
+
+    window.onscroll = () => {
+
+    };
+
+    const callbacks = new Map();
+
+    const onIntersect = (entries) => {
+        entries.forEach(({ isIntersecting, target: { id } }) => {
+            const props = callbacks.get(id);
+            if (isIntersecting) {
+                props.onIntersectionStart && props.onIntersectionStart();
+            } else {
+                props.onIntersectionEnd && props.onIntersectionEnd();
+            }
+        });
+    };
+    const observer = new IntersectionObserver(onIntersect,{threshold: 0.05});
+
+    const addObservable = (nodeId, { onIntersectionStart, onIntersectionEnd } = {}) => {
+        const node = document.querySelector(`#${nodeId}`);
+        try {
+            console.log(node);
+            observer.observe(node);
+            callbacks.set(nodeId, { onIntersectionStart, onIntersectionEnd });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+    const useObservable = (nodeId, props) => {
+        return () => addObservable(nodeId, props)
+    };
+
+    const scrollTo = (nodeId) => {
+        const { top } = document.querySelector(`#${nodeId}`).getBoundingClientRect();
+        window.scroll({
+            top,
+            behavior: 'smooth'
+        });
+    };
 
     const subscriber_queue = [];
     /**
@@ -406,6 +463,8 @@ var app = (function () {
     	let h2;
     	let t3;
     	let span1;
+    	let mounted;
+    	let dispose;
 
     	const block = {
     		c: function create() {
@@ -419,18 +478,18 @@ var app = (function () {
     			t3 = space();
     			span1 = element("span");
     			span1.textContent = "My Works";
-    			attr_dev(span0, "class", "goDownButton svelte-1mrqhda");
-    			add_location(span0, file, 41, 4, 830);
-    			attr_dev(h2, "class", "name svelte-1mrqhda");
-    			add_location(h2, file, 42, 4, 878);
-    			attr_dev(span1, "class", "goDownButton svelte-1mrqhda");
-    			add_location(span1, file, 43, 4, 921);
+    			attr_dev(span0, "class", "goDownButton svelte-8qw5uc");
+    			add_location(span0, file, 43, 4, 928);
+    			attr_dev(h2, "class", "name svelte-8qw5uc");
+    			add_location(h2, file, 44, 4, 1010);
+    			attr_dev(span1, "class", "goDownButton svelte-8qw5uc");
+    			add_location(span1, file, 45, 4, 1053);
     			attr_dev(div, "id", "navbar");
-    			attr_dev(div, "class", "svelte-1mrqhda");
-    			add_location(div, file, 40, 2, 807);
+    			attr_dev(div, "class", "svelte-8qw5uc");
+    			add_location(div, file, 42, 2, 905);
     			set_style(nav, "transform", "translateY(" + (/*$TopBarShown*/ ctx[0] ? "0%" : "-100%") + ")");
-    			attr_dev(nav, "class", "svelte-1mrqhda");
-    			add_location(nav, file, 39, 0, 736);
+    			attr_dev(nav, "class", "svelte-8qw5uc");
+    			add_location(nav, file, 41, 0, 833);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -443,6 +502,15 @@ var app = (function () {
     			append_dev(div, h2);
     			append_dev(div, t3);
     			append_dev(div, span1);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(span0, "click", /*click_handler*/ ctx[1], false, false, false),
+    					listen_dev(span1, "click", /*click_handler_1*/ ctx[2], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*$TopBarShown*/ 1) {
@@ -453,6 +521,8 @@ var app = (function () {
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(nav);
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
@@ -479,8 +549,10 @@ var app = (function () {
 
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("TopBar", $$slots, []);
-    	$$self.$capture_state = () => ({ TopBarShown, $TopBarShown });
-    	return [$TopBarShown];
+    	const click_handler = () => scrollTo("whoAmI");
+    	const click_handler_1 = () => scrollTo("myWorks");
+    	$$self.$capture_state = () => ({ TopBarShown, scrollTo, $TopBarShown });
+    	return [$TopBarShown, click_handler, click_handler_1];
     }
 
     class TopBar extends SvelteComponentDev {
@@ -496,38 +568,6 @@ var app = (function () {
     		});
     	}
     }
-
-    window.onscroll = () => {
-
-    };
-
-    const callbacks = new Map();
-
-    const onIntersect = (entries) => {
-        entries.forEach(({ isIntersecting, target: { id } }) => {
-            const props = callbacks.get(id);
-            if (isIntersecting) {
-                props.onIntersectionStart && props.onIntersectionStart();
-            } else {
-                props.onIntersectionEnd && props.onIntersectionEnd();
-            }
-        });
-    };
-    const observer = new IntersectionObserver(onIntersect);
-
-    const addObservable = (nodeId, { onIntersectionStart, onIntersectionEnd } = {}) => {
-        const node = document.querySelector(`#${nodeId}`);
-        try {
-            console.log(node);
-            observer.observe(node);
-            callbacks.set(nodeId, { onIntersectionStart,onIntersectionEnd });
-        } catch (e) {
-            console.error(e);
-        }
-    };
-    const useObservable = (nodeId, props) => {
-        return () => addObservable(nodeId, props)
-    };
 
     /* src\components\FirstPage.svelte generated by Svelte v3.24.1 */
     const file$1 = "src\\components\\FirstPage.svelte";
@@ -628,7 +668,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			div.textContent = "hi";
-    			attr_dev(div, "id", "page1");
+    			attr_dev(div, "id", "whoAmI");
     			attr_dev(div, "class", "svelte-2y79fx");
     			add_location(div, file$2, 13, 0, 150);
     		},
@@ -694,7 +734,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			div.textContent = "Hola";
-    			attr_dev(div, "id", "page1");
+    			attr_dev(div, "id", "myWorks");
     			attr_dev(div, "class", "svelte-157ppn8");
     			add_location(div, file$3, 13, 0, 150);
     		},
@@ -765,7 +805,9 @@ var app = (function () {
     	let t4;
     	let footer;
     	let t5;
-    	let link;
+    	let link0;
+    	let t6;
+    	let link1;
     	let current;
     	topbar = new TopBar({ $$inline: true });
     	firstpage = new FirstPage({ $$inline: true });
@@ -786,12 +828,17 @@ var app = (function () {
     			t4 = space();
     			footer = element("footer");
     			t5 = space();
-    			link = element("link");
+    			link0 = element("link");
+    			t6 = space();
+    			link1 = element("link");
     			add_location(main, file$4, 22, 0, 464);
     			add_location(footer, file$4, 23, 0, 473);
-    			attr_dev(link, "href", "https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
-    			attr_dev(link, "rel", "stylesheet");
-    			add_location(link, file$4, 25, 0, 485);
+    			attr_dev(link0, "href", "https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+    			attr_dev(link0, "rel", "stylesheet");
+    			add_location(link0, file$4, 25, 0, 485);
+    			attr_dev(link1, "href", "https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+    			attr_dev(link1, "rel", "stylesheet");
+    			add_location(link1, file$4, 28, 2, 593);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -809,7 +856,9 @@ var app = (function () {
     			insert_dev(target, t4, anchor);
     			insert_dev(target, footer, anchor);
     			insert_dev(target, t5, anchor);
-    			insert_dev(target, link, anchor);
+    			insert_dev(target, link0, anchor);
+    			insert_dev(target, t6, anchor);
+    			insert_dev(target, link1, anchor);
     			current = true;
     		},
     		p: noop,
@@ -841,7 +890,9 @@ var app = (function () {
     			if (detaching) detach_dev(t4);
     			if (detaching) detach_dev(footer);
     			if (detaching) detach_dev(t5);
-    			if (detaching) detach_dev(link);
+    			if (detaching) detach_dev(link0);
+    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(link1);
     		}
     	};
 

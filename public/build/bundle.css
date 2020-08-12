@@ -1,7 +1,7 @@
 body{padding:0;font-family:"Rubik", sans-serif}html{box-sizing:border-box;text-rendering:optimizeLegibility}
 div.svelte-1qpxkwl{height:calc(100% - 4rem);background-color:#e5e5e5;padding-top:4rem}
 div.svelte-157ppn8{height:calc(100% - 4rem);background-color:#fca311;padding-top:4rem}
-nav.svelte-1mrqhda{background-color:#14213d;position:fixed;display:block;width:100%;transition:0.5s}div.svelte-1mrqhda{margin:auto;width:100%;max-width:1400px;color:white;height:4rem;display:flex;-webkit-box-pack:justify;justify-content:space-between;-webkit-box-align:center;align-items:center}.name.svelte-1mrqhda{align-self:center}.goDownButton.svelte-1mrqhda{margin:1.5rem;transition:0.5s;height:100%;align-self:center;padding-top:2.5rem}.goDownButton.svelte-1mrqhda:hover{padding-top:3.5rem}
+nav.svelte-8qw5uc{background-color:#14213d;position:fixed;display:block;width:100%;transition:0.5s}div.svelte-8qw5uc{margin:auto;width:100%;max-width:1400px;color:white;height:4rem;display:flex;-webkit-box-pack:justify;justify-content:space-between;-webkit-box-align:center;align-items:center}.name.svelte-8qw5uc{font-family:"Dancing Script", cursive;align-self:center;font-size:2.2em}.goDownButton.svelte-8qw5uc{margin:2rem;transition:0.5s;height:1rem;align-self:center}.goDownButton.svelte-8qw5uc:hover{padding-top:0.5rem}
 div.svelte-2y79fx{height:calc(100% - 4rem);background-color:#2ec4b6;padding-top:4rem}
 
 /*# sourceMappingURL=bundle.css.map */

@@ -15,14 +15,14 @@ const onIntersect = (entries) => {
         }
     })
 }
-const observer = new IntersectionObserver(onIntersect);
+const observer = new IntersectionObserver(onIntersect,{threshold: 0.05});
 
 export const addObservable = (nodeId, { onIntersectionStart, onIntersectionEnd } = {}) => {
     const node = document.querySelector(`#${nodeId}`)
     try {
         console.log(node)
         observer.observe(node);
-        callbacks.set(nodeId, { onIntersectionStart,onIntersectionEnd });
+        callbacks.set(nodeId, { onIntersectionStart, onIntersectionEnd });
     } catch (e) {
         console.error(e)
     }
@@ -33,4 +33,12 @@ export const useObservable = (nodeId, props) => {
 export const removeObservable = (nodeId) => {
     observer && node && observer.unobserve(node);
     callbacks.set(nodeId, undefined);
+}
+
+export const scrollTo = (nodeId) => {
+    const { top } = document.querySelector(`#${nodeId}`).getBoundingClientRect();
+    window.scroll({
+        top,
+        behavior: 'smooth'
+    })
 }

@@ -1,5 +1,6 @@
 <script context="module">
   import { TopBarShown } from "../utils/Stores";
+  import { scrollTo } from "../utils/ScrollController";
 </script>
 
 <style>
@@ -23,24 +24,25 @@
     align-items: center;
   }
   .name {
+    font-family: "Dancing Script", cursive;
     align-self: center;
+    font-size: 2.2em;
   }
   .goDownButton {
-    margin: 1.5rem;
+    margin: 2rem;
     transition: 0.5s;
-    height: 100%;
+    height: 1rem;
     align-self: center;
-    padding-top: 2.5rem;
   }
   .goDownButton:hover {
-    padding-top: 3.5rem;
+    padding-top: 0.5rem;
   }
 </style>
 
-<nav style="transform: translateY({$TopBarShown? "0%" : "-100%"})">
+<nav style="transform: translateY({$TopBarShown ? '0%' : '-100%'})">
   <div id="navbar">
-    <span class="goDownButton">Who am I</span>
+    <span class="goDownButton" on:click={()=>scrollTo("whoAmI")}>Who am I</span>
     <h2 class="name">Andrea Mangione</h2>
-    <span class="goDownButton">My Works</span>
+    <span class="goDownButton" on:click={()=>scrollTo("myWorks")}>My Works</span>
   </div>
 </nav>
