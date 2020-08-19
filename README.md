@@ -1,4 +1,4 @@
 My personal website.
 Work in progress!
 
-[Now Live!](andrea.mangione.me)
+[Now Live!](https://andrea.mangione.dev/)
