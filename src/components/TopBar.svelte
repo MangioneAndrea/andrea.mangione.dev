@@ -26,7 +26,7 @@
   .name {
     font-family: "Dancing Script", cursive;
     align-self: center;
-    font-size: 2.2em;
+    font-size: 1.4em;
   }
   .goDownButton {
     margin: 2rem;

@@ -26,4 +26,9 @@
 <link
   href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap"
   rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
+  rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Alata&display=swap"
+  rel="stylesheet" />
