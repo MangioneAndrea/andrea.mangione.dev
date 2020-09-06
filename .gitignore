@@ -42,3 +42,5 @@ _output
 
 .firebaserc
 .firebase/*
+
+public/build/*
