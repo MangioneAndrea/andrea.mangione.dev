@@ -1,5 +1,4 @@
 <script>
-
 </script>
 
 <style>
@@ -9,6 +8,5 @@
     padding-top: 4rem;
   }
 </style>
-
 
 <div id="whoAmI">hi</div>
