@@ -1,5 +1,7 @@
 
 import * as PIXI from "pixi.js";
+import "./rain/RainHandler";
+
 export const initPixi = (component, options = {}) => {
     if (typeof component === "string") {
         component = document.querySelector(component)
@@ -18,5 +20,6 @@ export const initPixi = (component, options = {}) => {
     resize();
 
     component.appendChild(app.view);
+    //app.renderer.backgroundColor = 0xFFFF00;
     return app;
 };

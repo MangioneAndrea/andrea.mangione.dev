@@ -73,7 +73,8 @@ class ParticlesText {
         this.particles = [];
 
         this.mouse = { x: 0, y: 0 }
-        this.container = new PIXI.ParticleContainer(50000);
+        this.container = new PIXI.ParticleContainer(5000);
+        this.container.setTransform(0, 0);
         this.app.stage.addChild(this.container);
 
     }
@@ -96,7 +97,7 @@ class ParticlesText {
                     // Note that y is the position of the baseline.
                     const path = font.getPath(that.text, 0, that.size, that.size);
                     const width = font.getAdvanceWidth(that.text, that.size);
-                    
+
 
                     that.cols = width;
                     that.rows = that.size;
@@ -171,7 +172,5 @@ class ParticlesText {
 
 export const createText = (pixiApp, text, props) => {
     const particles = new ParticlesText({ pixiApp, text, ...props });
-
-    document.querySelector("#page1").append(particles.app.view);
     particles.init();
 }
