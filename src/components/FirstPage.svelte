@@ -1,7 +1,6 @@
 <script>
   import { useObservable } from "../utils/ScrollController";
   import { TopBarShown } from "../utils/Stores";
-  import { createText } from "../helpers/pixijs/ParticleText";
   import { initPixi } from "../helpers/pixijs/PixiComponent";
 
   const observable = useObservable("page1", {
@@ -16,7 +15,7 @@
   };
 </script>
 
-<style>
+<style type="text/scss">
   div {
     height: calc(100% - 4rem);
     padding-top: 4rem;
