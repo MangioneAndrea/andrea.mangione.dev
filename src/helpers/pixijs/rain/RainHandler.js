@@ -1,6 +1,5 @@
 
 import * as PIXI from "pixi.js";
-import { removeFromArray } from "../../CommonFunctions";
 import RainDrop from "./RainDrop"
 
 
@@ -9,13 +8,17 @@ PIXI.Application.prototype.rain = function () {
     /**@const {Array<RainDrop>}*/
     let RainDrops = [];
     const graphics = new PIXI.Graphics();
+    this.renderer.width
     this.stage.addChild(graphics);
 
     const animate = () => {
         graphics.clear();
-        if (RainDrops.length < 10 && (new Date().getTime() - lastDrop) > 1500) {
+        if (RainDrops.length < 10 && (new Date().getTime() - lastDrop) > 1000 && Math.random()>0.99) {
             lastDrop = new Date().getTime();
-            RainDrops.push(new RainDrop(graphics, (e) => RainDrops = RainDrops.filter(a => a !== e)))
+            RainDrops.push(new RainDrop(graphics, {
+                containerWidth: this.renderer.width / this.renderer.resolution,
+                onDestroy: (e) => RainDrops = RainDrops.filter(a => a !== e)
+            }))
         }
         RainDrops.forEach(raindrop => raindrop.next());
         requestAnimationFrame(animate);

@@ -8,7 +8,6 @@ export function getWidth() {
     );
 }
 
-
-export function removeFromArray(arr, toRemove) {
-    arr = arr.filter(element => element !== toRemove);
+Math.clamp = function (n, min, max) {
+    return Math.min(Math.max(n, min), max)
 }
