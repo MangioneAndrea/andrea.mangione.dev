@@ -33,14 +33,17 @@
       font-family: "Dancing Script", cursive;
       align-self: center;
       font-size: 1.4em;
+      text-align: center;
     }
     .goDownButton {
-      margin: 2rem;
+      text-align: center;
+      margin: 1rem;
       transition: 0.5s;
       height: 1rem;
       align-self: center;
     }
     .goDownButton:hover {
+      text-align: center;
       padding-top: 0.5rem;
     }
   }

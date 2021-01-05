@@ -13,7 +13,6 @@
     const rightRain = initPixi("#rightRain", { backgroundColor: 0xe5e5e5 });
     leftRain.rain();
     rightRain.rain();
-    //createText(pixiApp, "Hi there! I'm Andrea.", { size: 45 });
   };
 </script>
 
