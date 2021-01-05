@@ -41,11 +41,17 @@
             text-align: center;
             font-size: 4.5rem;
             word-wrap: break-word;
+            @media only screen and (max-width: 768px) {
+              font-size: 3rem;
+            }
           }
           h3 {
             width: 100%;
             text-align: center;
             font-size: 2.5rem;
+            @media only screen and (max-width: 768px) {
+              font-size: 1.5rem;
+            }
           }
         }
         &#leftRain {
