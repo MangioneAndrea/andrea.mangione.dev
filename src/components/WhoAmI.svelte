@@ -4,7 +4,7 @@
 <style>
   div {
     height: calc(100% - 4rem);
-    background-color: #2ec4b6;
+    background-color: #772f1a;
     padding-top: 4rem;
   }
 </style>

@@ -9,8 +9,8 @@
   });
 
   const createPixi = () => {
-    const leftRain = initPixi("#leftRain", { backgroundColor: 0xe5e5e5 });
-    const rightRain = initPixi("#rightRain", { backgroundColor: 0xe5e5e5 });
+    const leftRain = initPixi("#leftRain", { backgroundColor: 0x252627 });
+    const rightRain = initPixi("#rightRain", { backgroundColor: 0x252627 });
     leftRain.rain();
     rightRain.rain();
   };
@@ -20,7 +20,7 @@
   div#page1 {
     height: calc(100% - 4rem);
     padding-top: 4rem;
-    background-color: #e5e5e5;
+    background-color: #252627;
 
     div.content {
       width: 100%;

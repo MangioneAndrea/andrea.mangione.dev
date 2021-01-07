@@ -5,7 +5,8 @@
 
 <style type="text/scss">
   nav {
-    background-color: #14213d;
+    //https://coolors.co/bfb48f-564e58-904e55-f2efe9-252627
+    background-color: #904E55;
     position: fixed;
     display: block;
     width: 100%;
