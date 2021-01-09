@@ -1,7 +1,12 @@
 
 import * as PIXI from "pixi.js";
 import "./rain/RainHandler";
-
+/**
+ * Prepare a Pixi application in a given element
+ * @param {string | HTMLElement} component where to render the canvas
+ * @param {*} options Any additional option to pass to the application
+ * @returns {PIXI.Application}
+ */
 export const initPixi = (component, options = {}) => {
     if (typeof component === "string") {
         component = document.querySelector(component)

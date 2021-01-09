@@ -1,4 +1,5 @@
 <script>
+  import "./helpers/CommonFunctions"
   import TopBar from "./components/TopBar.svelte";
   import FirstPage from "./components/FirstPage.svelte";
   import WhoAmI from "./components/WhoAmI.svelte";
@@ -18,6 +19,7 @@
 
 <TopBar />
 <FirstPage />
+
 <WhoAmI />
 <MyWorks />
 <main />

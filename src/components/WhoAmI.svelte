@@ -1,7 +1,7 @@
 <script>
 </script>
 
-<style>
+<style type="text/scss">
   div {
     height: calc(100% - 4rem);
     background-color: #772f1a;

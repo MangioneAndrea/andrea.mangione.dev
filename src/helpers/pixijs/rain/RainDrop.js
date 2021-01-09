@@ -1,5 +1,4 @@
 import * as PIXI_TYPE from "pixi.js";
-import { getWidth } from "../../CommonFunctions";
 import * as Colours from "../Colours";
 
 class RainDrop {
