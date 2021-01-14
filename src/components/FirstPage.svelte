@@ -1,21 +1,16 @@
 <script>
   import { useObservable } from "../utils/ScrollController";
   import { TopBarShown } from "../utils/Stores";
-  import { initPixi } from "../helpers/pixijs/PixiComponent";
   import FaLinkedin from 'svelte-icons/fa/FaLinkedin.svelte'
   import FaGithub from 'svelte-icons/fa/FaGithub.svelte'
+import RainDrop from "../elements/rain/RainDrop.svelte";
+import RainHandler from "../elements/rain/RainHandler.svelte";
 
+  let right,left;
   const observable = useObservable("page1", {
     onIntersectionStart: () => TopBarShown.set(true),
     onIntersectionEnd: () => TopBarShown.set(false),
   });
-
-  const createPixi = () => {
-    const leftRain = initPixi("#leftRain", { backgroundColor: 0x252627 });
-    const rightRain = initPixi("#rightRain", { backgroundColor: 0x252627 });
-    leftRain.rain();
-    rightRain.rain();
-  };
 
   const openGithub = () => {
     window.open("https://github.com/MangioneAndrea", "_blank");
@@ -34,9 +29,9 @@
     div.content {
       width: 100%;
       position: absolute;
-      display: flex; /* establish flex container */
-      flex-direction: row; /* default value; can be omitted */
-      flex-wrap: nowrap; /* default value; can be omitted */
+      display: flex; 
+      flex-direction: row; 
+      flex-wrap: nowrap; 
       justify-content: space-between;
       height: calc(100% - 5rem);
 
@@ -94,9 +89,11 @@
   }
 </style>
 
-<div id="page1" use:observable use:createPixi>
+<div id="page1" use:observable>
   <div class="content">
-    <div class="sides" id="leftRain" />
+    <div bind:this={right} class="sides" id="leftRain">
+      <RainHandler container={right}/>
+    </div>
     <div class="sides center">
       <h1>Hi there! I'm Andrea</h1>
       <h3>Part time student, Developer for life!</h3>
@@ -109,6 +106,8 @@
       </div>
     </div>
     </div>
-    <div class="sides" id="rightRain" />
+    <div bind:this={left} class="sides" id="rightRain">
+      <RainHandler container={left}/>
+    </div>
   </div>
 </div>
