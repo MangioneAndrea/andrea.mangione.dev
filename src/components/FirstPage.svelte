@@ -37,6 +37,7 @@ import RainHandler from "../elements/rain/RainHandler.svelte";
 
       div.sides {
         height: 100%;
+        position: relative;
         &.center {
           //margin: auto;
           width: 50%;
@@ -61,7 +62,7 @@ import RainHandler from "../elements/rain/RainHandler.svelte";
             text-align:center;
             position:absolute;
             bottom: 0;
-            width: 50%;
+            width: 100%;
           .sprite {
             height: 50px;
             width: 50px;

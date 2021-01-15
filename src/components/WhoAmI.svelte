@@ -1,4 +1,5 @@
 <script>
+
 </script>
 
 <style type="text/scss">
@@ -9,4 +10,12 @@
   }
 </style>
 
-<div id="whoAmI">hi</div>
+<div id="whoAmI">
+  <div>
+  I'm an attention catching animations fan and i always try to create some in an elegant way
+  <br/>
+  <br/>
+  Animations can also be distracting, an avoiding it is the most difficoult part!
+  </div>
+
+</div>

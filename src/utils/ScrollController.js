@@ -20,7 +20,6 @@ const observer = new IntersectionObserver(onIntersect,{threshold: 0.05});
 export const addObservable = (nodeId, { onIntersectionStart, onIntersectionEnd } = {}) => {
     const node = document.querySelector(`#${nodeId}`)
     try {
-        console.log(node)
         observer.observe(node);
         callbacks.set(nodeId, { onIntersectionStart, onIntersectionEnd });
     } catch (e) {

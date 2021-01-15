@@ -4,18 +4,25 @@
   import FirstPage from "./components/FirstPage.svelte";
   import WhoAmI from "./components/WhoAmI.svelte";
   import MyWorks from "./components/MyWorks.svelte";
+import { } from "os";
 </script>
 
-<style>
+<style type="scss">
   :global(body) {
     padding: 0;
     font-family: "Rubik", sans-serif;
   }
   :global(html) {
+    overflow-x: hidden;
     box-sizing: border-box;
     text-rendering: optimizeLegibility;
   }
 </style>
+
+<svelte:head>
+  <title>Andrea's Portfolio</title>
+  
+</svelte:head>
 
 <TopBar />
 <FirstPage />
