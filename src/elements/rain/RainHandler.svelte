@@ -1,7 +1,7 @@
 <script>
   import RainDrop from "./RainDrop.svelte";
 
-  let maxHeight;
+  let maxHeight, maxWidth;
   let rainDrops = [];
 
   const addRaindrop = (key) => {
@@ -10,7 +10,7 @@
         rainDrops = rainDrops.filter((el) => el !== elem);
       },
       coordinates: {
-        x: Math.random() * 150,
+        x: Math.random() * maxWidth,
         y: -50,
       },
       maxHeight,
@@ -27,7 +27,7 @@
   };
 </script>
 
-<div bind:offsetHeight={maxHeight} use:initRain>
+<div bind:offsetHeight={maxHeight} bind:offsetWidth={maxWidth} use:initRain>
   {#each rainDrops as props (props)}
     <RainDrop {...props} />
   {/each}

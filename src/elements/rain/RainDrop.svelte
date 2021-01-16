@@ -9,7 +9,7 @@
   const onCreation = (elem) => {
     anime({
       targets: elem,
-      opacity:0,
+      opacity: 0,
       translateY: maxHeight,
       duration: 3000,
       easing: "linear",
@@ -18,15 +18,11 @@
   };
 </script>
 
-{#if coordinates >= maxHeight}
-  <div>done</div>
-{:else}
-  <div
-    use:onCreation
-    class="raindrop"
-    style="background-color:{color}; left:{coordinates.x}px; top:{coordinates.y}px"
-  />
-{/if}
+<div
+  use:onCreation
+  class="raindrop"
+  style="background-color:{color}; left:{coordinates.x}px; top:{coordinates.y}px"
+/>
 
 <style lang="scss">
   div {

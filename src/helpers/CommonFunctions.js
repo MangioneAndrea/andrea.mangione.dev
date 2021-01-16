@@ -1,11 +1,13 @@
 export function getWidth(element) {
-    return element ? Math.max(element.offsetWidth) : Math.max(
+  return element
+    ? Math.max(element.offsetWidth)
+    : Math.max(
         document.body.scrollWidth,
         document.documentElement.scrollWidth,
         document.body.offsetWidth,
         document.documentElement.offsetWidth,
         document.documentElement.clientWidth
-    );
+      );
 }
 
 /**
@@ -15,5 +17,16 @@ export function getWidth(element) {
  * @param {number} max Maximum limit for the value
  */
 Math.clamp = function (n = 0, min = -Infinity, max = Infinity) {
-    return Math.min(Math.max(n, min), max)
+  return Math.min(Math.max(n, min), max);
+};
+
+export function debounce(callback, delay) {
+  var timeout;
+  return (...prop) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      timeout = null;
+      callback(...prop);
+    }, delay);
+  };
 }
