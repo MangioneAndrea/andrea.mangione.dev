@@ -4,8 +4,8 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
-import url from "@rollup/plugin-url";
-import css from 'rollup-plugin-css-only';
+import css from "rollup-plugin-css-only";
+import svelteSVG from "rollup-plugin-svelte-svg";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -43,6 +43,7 @@ export default {
     file: "public/build/bundle.js",
   },
   plugins: [
+    svelteSVG(),
     svelte({
       compilerOptions: {
         // enable run-time checks when not in production
@@ -50,7 +51,7 @@ export default {
       },
       // we'll extract any component CSS out into
       // a separate file - better for performance
-      preprocess: sveltePreprocess({}),
+      preprocess: sveltePreprocess({})
     }),
     css({ output: "bundle.css" }),
 
@@ -65,7 +66,6 @@ export default {
       preferBuiltins: false,
     }),
     commonjs(),
-    url(),
     // In dev mode, call `npm run start` once
     // the bundle has been generated
     !production && serve(),

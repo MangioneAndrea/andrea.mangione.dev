@@ -2,8 +2,7 @@
   import "./helpers/CommonFunctions";
   import TopBar from "./components/TopBar.svelte";
   import FirstPage from "./components/FirstPage.svelte";
-  import WhoAmI from "./components/WhoAmI.svelte";
-  import MyWorks from "./components/MyWorks.svelte";
+  import InfinitePage from "./components/InfinitePage.svelte";
   import "./helpers/CommonFunctions";
 </script>
 
@@ -14,8 +13,7 @@
 <TopBar />
 <FirstPage />
 
-<WhoAmI />
-<MyWorks />
+<InfinitePage />
 <main />
 <footer />
 

@@ -80,3 +80,7 @@ export function getIdealCurve({ p1x, p1y, p2x, p2y, minCurve = 0 }) {
   // construct the command to draw a quadratic curve
   return `M${p1x} ${p1y} Q${c1x} ${c1y} ${p2x} ${p2y}`;
 }
+
+export function oneRandomOutOf(arr = []) {
+  return Math.floor(Math.random() * arr.length);
+}
