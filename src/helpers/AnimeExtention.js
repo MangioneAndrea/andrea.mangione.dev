@@ -27,10 +27,10 @@ export const asyncAnime = (props) => {
 };
 
 /**
- * 
- * @param {"in" | "out" | "inOut" | "all"} which 
+ *
+ * @param {"in" | "out" | "inOut" | "all"} which
  */
-export const oneRandomEase = (which="all") => {
+export const oneRandomEase = (which = "all") => {
   switch (which) {
     case "in":
       return oneRandomOutOf(easeIn);
@@ -38,7 +38,7 @@ export const oneRandomEase = (which="all") => {
       return oneRandomOutOf(easeOut);
     case "inOut":
       return oneRandomOutOf(easeInOut);
-      case "all"
+    case "all":
     default:
       return oneRandomOutOf([...easeInOut, ...easeIn, ...easeOut]);
   }

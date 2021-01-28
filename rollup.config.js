@@ -51,7 +51,7 @@ export default {
       },
       // we'll extract any component CSS out into
       // a separate file - better for performance
-      preprocess: sveltePreprocess({})
+      preprocess: sveltePreprocess({}),
     }),
     css({ output: "bundle.css" }),
 
@@ -76,7 +76,7 @@ export default {
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
-    production && terser(),
+    production && terser({ ecma: 2020 }),
   ],
   watch: {
     clearScreen: false,
