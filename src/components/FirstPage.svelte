@@ -27,7 +27,7 @@
     onIntersectionStart: () => {
       anime({
         targets: "#compy",
-        right: "0.5rem",
+        right: window.innerWidth > 768 ? "0.5rem" : "-2rem",
       });
     },
   });
