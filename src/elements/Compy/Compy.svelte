@@ -135,24 +135,24 @@
   width="225"
   bind:this={main}
   on:click={wink}
-  height="200">
+  height="200"
+>
   <defs>
     <!-- Head-->
     <g id="head">
       <!-- Head contour -->
-      <rect width="103" height="65" x="
-      0" y="24" class="skin" />
+      <rect width="103" height="65" x="0" y="24" class="skin" rx="7" />
       <!-- Face -->
-      <rect width="88" height="50" x="8" y="32" class="face" />
+      <rect width="88" height="50" x="8" y="32" class="face"rx="5"  />
       <!-- Left eye -->
       <g>
-        <rect x="17" y="43" class="eye" bind:this={leftEye} />
+        <rect x="17" y="43" class="eye" bind:this={leftEye} rx="5" />
         <!-- Left pupil -->
         <rect x="25" y="43" class="pupil" bind:this={leftPupil} />
       </g>
       <!-- Right eye -->
       <g>
-        <rect x="59" y="43" class="eye" bind:this={rightEye} />
+        <rect x="59" y="43" class="eye" bind:this={rightEye} rx="5"  />
         <!-- Right pupil -->
         <rect x="67" y="43" class="pupil" bind:this={rightPupil} />
       </g>

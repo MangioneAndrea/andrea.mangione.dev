@@ -1,9 +1,10 @@
 <script>
-  import SmallDescription from "./InfiniteParts/SmallDescription.svelte";
   import Stacks from "./InfiniteParts/Stacks.svelte";
 </script>
 
-<div id="whoAmI"><SmallDescription /><Stacks /></div>
+<div id="whoAmI">
+  <Stacks />
+</div>
 
 <style type="text/scss">
   div#whoAmI {

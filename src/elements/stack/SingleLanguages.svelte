@@ -1,12 +1,13 @@
 <script>
   export let languages;
   export let title;
+  export let description;
   import anime from "animejs";
   import { onMount } from "svelte";
   import { oneRandomEase } from "../../helpers/AnimeExtention";
 
   const maxWiggleX = 3;
-  const maxWiggleY = 10;
+  const maxWiggleY = 20;
   const imageSize = 75;
   const svgSize = imageSize * 2.5;
   const imageSizePerc = ((imageSize * 2) / svgSize) * 100 + "%";
@@ -14,12 +15,12 @@
   const places = languages.map((language) => {
     const res = {
       ...language,
-      x: Math.random() * maxWiggleX * 2,
-      y: Math.random() * maxWiggleY * 2,
+      x: 0,
+      y: 0,
     };
     Object.assign(res, {
-      wiggleX: res.x > maxWiggleX ? res.x - maxWiggleX : res.x + maxWiggleX,
-      wiggleY: res.y > maxWiggleX ? res.y - maxWiggleY : res.y + maxWiggleY,
+      wiggleX: maxWiggleX,
+      wiggleY: maxWiggleX,
     });
     return res;
   });
@@ -45,7 +46,12 @@
 </script>
 
 <div class="singleLanguages">
-  <h4>{title}</h4>
+  <div class="description">
+    <h3>{title}</h3>
+    <p>
+      {description}
+    </p>
+  </div>
   {#each places as place}
     <svg width={svgSize} height={svgSize}>
       <g bind:this={place.elem}>
@@ -63,8 +69,9 @@
 
 <style type="text/scss">
   div.singleLanguages {
+    margin: auto;
     width: fit-content;
-    h4 {
+    div.description {
       text-align: center;
     }
   }

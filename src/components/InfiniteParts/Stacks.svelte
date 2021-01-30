@@ -13,42 +13,66 @@
 </script>
 
 <div id="stacks">
+  <h1>My Stacks</h1>
   <Stack
     title="Web apps | Frontend"
+    description="Web-developing's is getting more popular every day. Today there are 
+    countless frameworks one can use. From the very standard svelte to the more peculiar Vue!"
     languages={[
       {
         image: React,
-        description: "react",
+        key: "react",
+        description:
+          "React has it's best advantage when creating complex yet big webapps. The hook's" +
+          " feature made it very simple to write reusable components",
       },
       {
         image: Angular,
-        description: "angular",
+        key: "angular",
+        description:
+          "Angular is my preference with bigger projects. It gets easyer to work in bigger" +
+          " groups if you have such a great structure",
       },
       {
         image: Svelte,
-        description: "svelte",
+        key: "svelte",
+        description:
+          "Svelte is fantastic for small/medium webapps. It reduces the amount of code and complexity" +
+          " by a lot. This page has been made with svelte :D",
       },
     ]}
   />
+
   <Stack
     title="Standalones | Backend"
+    description="Structure, security, reliability. That is what each app needs. One good language can allow this and even more"
     languages={[
       {
         image: Java,
-        description: "Java",
+        key: "Java",
+        description:
+          "Java is one of the best enterprise choices for a big project. It's easy to maintain" +
+          " and the structure is just amazing",
       },
       {
         image: Kotlin,
-        description: "Kotlin",
+        key: "Kotlin",
+        description:
+          "Kotlin is just java but better. All reduction of the code made this my preferite Object" +
+          " Oriented language!",
       },
       {
         image: NodeJS,
-        description: "Node",
+        key: "Node",
+        description:
+          "NodeJS has in my opinion the best community. It is just perfect for small/mid projects " +
+          " and can unify all the developer by letting them use only one language!",
       },
     ]}
   />
   <SingleLanguages
     title="Honorable mentions"
+    description="Hola"
     languages={[
       {
         image: MongoDB,
@@ -68,5 +92,12 @@
 
 <style type="text/scss">
   div#stacks {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    h1 {
+      font-size: 4.5rem;
+      margin: auto;
+    }
   }
 </style>

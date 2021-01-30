@@ -82,5 +82,5 @@ export function getIdealCurve({ p1x, p1y, p2x, p2y, minCurve = 0 }) {
 }
 
 export function oneRandomOutOf(arr = []) {
-  return Math.floor(Math.random() * arr.length);
+  return arr[Math.floor(Math.random() * arr.length)];
 }
