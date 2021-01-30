@@ -123,8 +123,6 @@
       rightPupil,
       357
     );
-    resetRight();
-    resetLeft();
   });
 </script>
 

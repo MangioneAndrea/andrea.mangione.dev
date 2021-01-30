@@ -38,11 +38,6 @@
     return res;
   });
 
-  window.onresize = () => {
-    if (window.innerWidth > 1000) svgSize = 150;
-    else svgSize = 75;
-  };
-
   // Each element needs to know the previous one
   places.forEach((element, index) => {
     places[(index + 1) % languages.length].previous = element;
