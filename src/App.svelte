@@ -4,6 +4,7 @@
   import FirstPage from "./components/FirstPage.svelte";
   import InfinitePage from "./components/InfinitePage.svelte";
   import "./helpers/CommonFunctions";
+  import Footer from "./components/Footer.svelte";
 </script>
 
 <svelte:head>
@@ -14,6 +15,7 @@
 <FirstPage />
 
 <InfinitePage />
+<Footer />
 <main />
 <footer />
 

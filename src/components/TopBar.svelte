@@ -3,6 +3,14 @@
   import { scrollTo } from "../utils/ScrollController";
 </script>
 
+<nav class={$TopBarShown ? 'shown' : 'hidden'}>
+  <div id="navbar">
+    <span class="goDownButton" on:click={() => scrollTo('whoAmI')}>Who am I</span>
+    <h2 class="name">Andrea Mangione</h2>
+    <span class="goDownButton" on:click={() => scrollTo('myWorks')}>My Works</span>
+  </div>
+</nav>
+
 <style type="text/scss">
   nav {
     //https://coolors.co/bfb48f-564e58-904e55-f2efe9-252627
@@ -49,11 +57,3 @@
     }
   }
 </style>
-
-<nav class={$TopBarShown ? 'shown' : 'hidden'}>
-  <div id="navbar">
-    <span class="goDownButton" on:click={() => scrollTo('whoAmI')}>Who am I</span>
-    <h2 class="name">Andrea Mangione</h2>
-    <span class="goDownButton" on:click={() => scrollTo('myWorks')}>My Works</span>
-  </div>
-</nav>

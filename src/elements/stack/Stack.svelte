@@ -47,7 +47,7 @@
       easing: "easeInOutCubic",
       direction: "alternate",
       loop: true,
-      duration: 5000,
+      duration: anime.random(4000,6000),
     };
     places.forEach((place) => {
       anime({

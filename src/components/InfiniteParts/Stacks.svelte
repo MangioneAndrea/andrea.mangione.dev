@@ -72,19 +72,25 @@
   />
   <SingleLanguages
     title="Honorable mentions"
-    description="Hola"
+    description="The stacks I've been latelly using, do not belong directly to frontend/backend, but surelly deserve to be mentioned"
     languages={[
       {
         image: MongoDB,
-        description: "MongoDB",
+        key: "MongoDB",
+        description:
+          "Mongo is my all time favourite database type. It's very powerful and even the worst structured databased can be very fast thanks to the aggregation framework",
       },
       {
         image: GraphQL,
-        description: "GraphQL",
+        key: "GraphQL",
+        description:
+          "GraphQL is the easiest way to let front and backend communicate. The structure is very simple and the error handling is just the best. More complicated features like scalars can make the communication super clean.",
       },
       {
         image: Unreal,
-        description: "Unreal",
+        key: "Unreal",
+        description:
+          "Unreal is my preferite game engine. The combination bewtween the performance and cotrol of C++ and the prototyping of Blueprint, it is possible to create cool games even as a solo developer",
       },
     ]}
   />

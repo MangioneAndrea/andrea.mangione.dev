@@ -1,35 +1,16 @@
 <script>
-  import anime from "animejs";
   import { useObservable } from "../utils/ScrollController";
   import { TopBarShown } from "../utils/Stores";
   import Compy from "../elements/compy/Compy.svelte";
   import FaLinkedin from "svelte-icons/fa/FaLinkedin.svelte";
   import FaGithub from "svelte-icons/fa/FaGithub.svelte";
   import RainHandler from "../elements/rain/RainHandler.svelte";
+  import { openGithub, openlinkedin } from "../utils/External";
 
   let right, left;
   const observable = useObservable("page1", {
     onIntersectionStart: () => TopBarShown.set(true),
     onIntersectionEnd: () => TopBarShown.set(false),
-  });
-
-  const openGithub = () => {
-    window.open("https://github.com/MangioneAndrea", "_blank");
-  };
-  const openlinkedin = () => {
-    window.open(
-      "https://www.linkedin.com/in/andrea-mangione-592902156/",
-      "_blank"
-    );
-  };
-
-  const observableCompy = useObservable("animDescription", {
-    onIntersectionStart: () => {
-      anime({
-        targets: "#compy",
-        right: window.innerWidth > 768 ? "0.5rem" : "-2rem",
-      });
-    },
   });
 </script>
 
@@ -53,10 +34,8 @@
     <div bind:this={left} class="sides" id="rightRain">
       <RainHandler container={left} />
     </div>
-    <div id="animDescription" use:observableCompy>
-      <div id="compy">
-        <Compy />
-      </div>
+    <div id="compy">
+      <Compy />
     </div>
   </div>
 </div>
@@ -128,12 +107,10 @@
       }
     }
   }
-  div#animDescription {
-    #compy {
-      display: inline-block;
-      position: absolute;
-      right: -250px;
-      bottom: -50px;
-    }
+  div#compy {
+    display: inline-block;
+    position: absolute;
+    bottom: -50px;
+    right: 0;
   }
 </style>
