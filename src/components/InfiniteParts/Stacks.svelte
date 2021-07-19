@@ -6,6 +6,7 @@
   import Kotlin from "../../images/Logos/Kotlin.svg";
   import Java from "../../images/Logos/Java.svg";
   import NodeJS from "../../images/Logos/NodeJS.svg";
+  import Go from "../../images/Logos/Go.svg";
   import MongoDB from "../../images/Logos/MongoDB.svg";
   import GraphQL from "../../images/Logos/GraphQL.svg";
   import Unreal from "../../images/Logos/UnrealEngine.svg";
@@ -48,18 +49,18 @@
     description="Structure, security, reliability. That is what each app needs. One good language can allow this and even more"
     languages={[
       {
-        image: Java,
-        key: "Java",
+        image: Go,
+        key: "Golang",
         description:
-          "Java is one of the best enterprise choices for a big project. It's easy to maintain" +
-          " and the structure is just amazing",
+          "Golang is my newest favourite language. It's just beautiful and needs very less effort " +
+          "to be deployed. Dividing a monolith into microservices has never been so easy before",
       },
       {
         image: Kotlin,
         key: "Kotlin",
         description:
           "Kotlin is just java but better. All reduction of the code made this my preferite Object" +
-          " Oriented language!",
+          " Oriented language ever",
       },
       {
         image: NodeJS,

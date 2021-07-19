@@ -4,36 +4,51 @@
   import Compy from "../elements/compy/Compy.svelte";
   import FaLinkedin from "svelte-icons/fa/FaLinkedin.svelte";
   import FaGithub from "svelte-icons/fa/FaGithub.svelte";
-  import RainHandler from "../elements/rain/RainHandler.svelte";
-  import { openGithub, openlinkedin } from "../utils/External";
+  import { github, linkedin } from "../utils/External";
+  import Flag from "../utils/Flags.svelte";
 
-  let right, left;
   const observable = useObservable("page1", {
     onIntersectionStart: () => TopBarShown.set(true),
     onIntersectionEnd: () => TopBarShown.set(false),
   });
+
 </script>
 
 <div id="page1" use:observable>
   <div class="content">
-    <div bind:this={right} class="sides" id="leftRain">
-      <RainHandler container={right} />
-    </div>
+    <div class="sides" />
     <div class="sides center">
       <h1>Hi there! I'm Andrea</h1>
       <h3>Part time student, Developer for life!</h3>
+      <p>
+        I'm a Switzerland-based developer. Currently working at <a
+          href="https://www.jacando.com/">Jacando AG</a
+        >
+        but always open for any kind of project.
+        <br /><br /> I love wandering all over the world and I'm also trying to
+        see as many places as possible. I speak 4 languages:
+        <Flag name="IT" />, <Flag name="UK" /> and <Flag name="CH" />/<Flag
+          name="DE"
+        /> . Lately, I've been trying to learn
+        <Flag name="ES" />.
+        <br /><br />
+        Did I say I love creating animations and interactive elements? ... maybe
+        you've already noticed 😜
+
+        <br /><br />
+        If any of these intrigued you, do not hesitate to contact me, I'd love to
+        share our experiences and see other's points of view
+      </p>
       <div class="linkscontainer">
-        <div class="sprite github" on:click={openGithub}>
+        <a class="sprite github" href={github}>
           <FaGithub />
-        </div>
-        <div class="sprite linkedin" on:click={openlinkedin}>
+        </a>
+        <a class="sprite linkedin" href={linkedin}>
           <FaLinkedin />
-        </div>
+        </a>
       </div>
     </div>
-    <div bind:this={left} class="sides" id="rightRain">
-      <RainHandler container={left} />
-    </div>
+    <div class="sides" />
     <div id="compy">
       <Compy />
     </div>
@@ -56,10 +71,13 @@
       height: calc(100% - 5rem);
 
       div.sides {
+        width: 25%;
+        opacity: 0.6;
         height: 100%;
         position: relative;
         &.center {
-          //margin: auto;
+          display: flex;
+          flex-direction: column;
           width: 50%;
           h1 {
             width: 100%;
@@ -69,6 +87,7 @@
             @media only screen and (max-width: 768px) {
               font-size: 3rem;
             }
+            margin-bottom: 0;
           }
           h3 {
             width: 100%;
@@ -78,12 +97,28 @@
               font-size: 1.5rem;
             }
           }
+          p {
+            margin-top: 10%;
+            font-size: 1.5rem;
+            @media only screen and (max-width: 768px) {
+              font-size: 0.7rem;
+            }
+            :global(svg) {
+              height: 1rem;
+              @media only screen and (max-width: 768px) {
+                height: 0.5rem;
+              }
+            }
+          }
+
           div.linkscontainer {
             text-align: center;
             position: absolute;
             bottom: 0;
             width: 100%;
             .sprite {
+              color: white;
+              opacity: 1;
               height: 50px;
               width: 50px;
               display: inline-block;
@@ -95,14 +130,6 @@
               }
             }
           }
-        }
-        &#leftRain {
-          width: 25%;
-          opacity: 0.6;
-        }
-        &#rightRain {
-          width: 25%;
-          opacity: 0.6;
         }
       }
     }

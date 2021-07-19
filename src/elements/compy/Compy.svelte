@@ -124,16 +124,20 @@
       357
     );
   });
+
+  let width;
 </script>
 
+<svelte:window bind:innerWidth={width} />
 <svg
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   width="195"
+  height="200"
+  viewBox={width < 768 ? "-200 -180 400 400" : undefined}
   bind:this={main}
   on:click={wink}
-  height="200"
 >
   <defs>
     <!-- Head-->
@@ -141,7 +145,7 @@
       <!-- Head contour -->
       <rect width="103" height="65" x="0" y="24" class="skin" rx="7" />
       <!-- Face -->
-      <rect width="88" height="50" x="8" y="32" class="face"rx="5"  />
+      <rect width="88" height="50" x="8" y="32" class="face" rx="5" />
       <!-- Left eye -->
       <g>
         <rect x="17" y="43" class="eye" bind:this={leftEye} rx="5" />
@@ -150,7 +154,7 @@
       </g>
       <!-- Right eye -->
       <g>
-        <rect x="59" y="43" class="eye" bind:this={rightEye} rx="5"  />
+        <rect x="59" y="43" class="eye" bind:this={rightEye} rx="5" />
         <!-- Right pupil -->
         <rect x="67" y="43" class="pupil" bind:this={rightPupil} />
       </g>
