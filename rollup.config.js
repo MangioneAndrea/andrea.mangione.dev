@@ -76,7 +76,7 @@ export default {
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
-    production && terser({ ecma: 2020 }),
+    production && terser({ ecma: 2018 }),
   ],
   watch: {
     clearScreen: false,
