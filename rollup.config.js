@@ -3,9 +3,10 @@ import sveltePreprocess from "svelte-preprocess";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
-import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 import svelteSVG from "rollup-plugin-svelte-svg";
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import { terser } from "rollup-plugin-terser";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,6 +42,12 @@ export default {
     format: "iife",
     name: "app",
     file: "public/build/bundle.js",
+    plugins: [
+      getBabelOutputPlugin({
+        plugins: ["@babel/plugin-proposal-optional-chaining"],
+        allowAllFormats: true
+      })
+    ],
   },
   plugins: [
     svelteSVG(),
