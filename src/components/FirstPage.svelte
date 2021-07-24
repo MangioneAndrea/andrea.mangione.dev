@@ -11,7 +11,6 @@
     onIntersectionStart: () => TopBarShown.set(true),
     onIntersectionEnd: () => TopBarShown.set(false),
   });
-
 </script>
 
 <div id="page1" use:observable>
@@ -75,10 +74,16 @@
         opacity: 0.6;
         height: 100%;
         position: relative;
+        @media only screen and (max-height: 1024px) {
+          width: 15%;
+        }
         &.center {
           display: flex;
           flex-direction: column;
           width: 50%;
+          @media only screen and (max-height: 1024px) {
+            width: 60%;
+          }
           h1 {
             width: 100%;
             text-align: center;
@@ -94,11 +99,15 @@
             text-align: center;
             font-size: 2.5rem;
             @media only screen and (max-width: 768px) {
-              font-size: 1.5rem;
+              margin: 0;
+              font-size: 1.2rem;
             }
           }
           p {
             margin-top: 10%;
+            @media only screen and (max-height: 1024px) {
+              margin-top: 4%;
+            }
             font-size: 1.5rem;
             @media only screen and (max-width: 768px) {
               font-size: 0.7rem;
