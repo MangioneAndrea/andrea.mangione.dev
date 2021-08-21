@@ -4,8 +4,9 @@
   import Compy from "../elements/compy/Compy.svelte";
   import FaLinkedin from "svelte-icons/fa/FaLinkedin.svelte";
   import FaGithub from "svelte-icons/fa/FaGithub.svelte";
-  import { github, linkedin } from "../utils/External";
+  import { github, linkedin, email } from "../utils/External";
   import Flag from "../utils/Flags.svelte";
+  import FaEnvelope from "svelte-icons/fa/FaEnvelope.svelte";
 
   const observable = useObservable("page1", {
     onIntersectionStart: () => TopBarShown.set(true),
@@ -44,6 +45,9 @@
         </a>
         <a class="sprite linkedin" href={linkedin}>
           <FaLinkedin />
+        </a>
+        <a class="sprite email" href={email}>
+          <FaEnvelope />
         </a>
       </div>
     </div>
@@ -135,6 +139,9 @@
                 padding: 5px;
               }
               &.linkedin {
+                padding: 5px;
+              }
+              &.email {
                 padding: 5px;
               }
             }

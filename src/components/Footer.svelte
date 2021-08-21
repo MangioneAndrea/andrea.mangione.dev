@@ -1,7 +1,8 @@
 <script>
   import FaLinkedinIn from "svelte-icons/fa/FaLinkedinIn.svelte";
   import FaGithub from "svelte-icons/fa/FaGithub.svelte";
-  import { github, linkedin } from "../utils/External";
+  import FaEnvelope from "svelte-icons/fa/FaEnvelope.svelte";
+  import { github, linkedin, email } from "../utils/External";
   const year = new Date().getFullYear();
 </script>
 
@@ -9,8 +10,9 @@
   <h2 class="name">Andrea Mangione</h2>
   <br />
   <div class="social">
-    <a href={linkedin} target="_blank"><FaGithub /></a>
-    <a href={github} target="_blank"><FaLinkedinIn /></a>
+    <a href={github} target="_blank"><FaGithub /></a>
+    <a href={linkedin} target="_blank"><FaLinkedinIn /></a>
+    <a href={email} target="_blank"><FaEnvelope /></a>
   </div>
   <p class="copyright">Andrea.mangione.dev © {year}</p>
 </div>
