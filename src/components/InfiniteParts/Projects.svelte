@@ -1,15 +1,17 @@
 <script>
+  import KotlinFirmata from "./Projects/KotlinFirmata.svelte";
+  import AirHockey from "./Projects/AirHockey.svelte";
 </script>
 
 <div id="projects">
   <h1>Projects</h1>
-  wip
+  <KotlinFirmata />
+  <AirHockey />
 </div>
 
 <style type="text/scss">
   div#projects {
     margin: auto;
-    margin-top: 4rem;
     width: 100%;
     text-align: center;
     h1 {

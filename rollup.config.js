@@ -5,7 +5,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import css from "rollup-plugin-css-only";
 import svelteSVG from "rollup-plugin-svelte-svg";
-import { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import { getBabelOutputPlugin } from "@rollup/plugin-babel";
 import { terser } from "rollup-plugin-terser";
 
 const production = !process.env.ROLLUP_WATCH;
@@ -45,8 +45,8 @@ export default {
     plugins: [
       getBabelOutputPlugin({
         plugins: ["@babel/plugin-proposal-optional-chaining"],
-        allowAllFormats: true
-      })
+        allowAllFormats: true,
+      }),
     ],
   },
   plugins: [
@@ -72,7 +72,7 @@ export default {
       dedupe: ["svelte"],
       preferBuiltins: false,
     }),
-    commonjs(),
+    commonjs({}),
     // In dev mode, call `npm run start` once
     // the bundle has been generated
     !production && serve(),

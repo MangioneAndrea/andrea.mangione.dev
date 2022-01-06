@@ -1,15 +1,13 @@
 <script>
   import Stack from "../../elements/stack/Stack.svelte";
-  import React from "../../images/Logos/React.svg";
-  import Angular from "../../images/Logos/Angular.svg";
+  import React from "devicon/icons/react/react-original.svg";
+  import Angular from "devicon/icons/angularjs/angularjs-original.svg";
   import Svelte from "../../images/Logos/Svelte.svg";
   import Kotlin from "../../images/Logos/Kotlin.svg";
-  import Java from "../../images/Logos/Java.svg";
-  import NodeJS from "../../images/Logos/NodeJS.svg";
-  import Go from "../../images/Logos/Go.svg";
-  import MongoDB from "../../images/Logos/MongoDB.svg";
-  import GraphQL from "../../images/Logos/GraphQL.svg";
-  import Unreal from "../../images/Logos/UnrealEngine.svg";
+  import NodeJS from "devicon/icons/nodejs/nodejs-original-wordmark.svg";
+  import Go from "devicon/icons/go/go-original-wordmark.svg";
+  import MongoDB from "devicon/icons/mongodb/mongodb-original-wordmark.svg";
+  import GraphQL from "devicon/icons/graphql/graphql-plain-wordmark.svg";
   import SingleLanguages from "../../elements/stack/SingleLanguages.svelte";
 </script>
 
@@ -86,12 +84,6 @@
         key: "GraphQL",
         description:
           "GraphQL is the easiest way to let front and backend communicate. The structure is very simple and the error handling is just the best. More complicated features like scalars can make the communication super clean.",
-      },
-      {
-        image: Unreal,
-        key: "Unreal",
-        description:
-          "Unreal is my preferite game engine. The combination bewtween the performance and cotrol of C++ and the prototyping of Blueprint, it is possible to create cool games even as a solo developer",
       },
     ]}
   />

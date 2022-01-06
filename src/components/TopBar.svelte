@@ -5,9 +5,9 @@
 
 <nav class={$TopBarShown ? 'shown' : 'hidden'}>
   <div id="navbar">
-    <span class="goDownButton" on:click={() => scrollTo('whoAmI')}>Who am I</span>
+    <span class="goDownButton" on:click={() => scrollTo('stacks')}>My Stacks</span>
     <h2 class="name">Andrea Mangione</h2>
-    <span class="goDownButton" on:click={() => scrollTo('myWorks')}>My Works</span>
+    <span class="goDownButton" on:click={() => scrollTo('projects')}>My Projects</span>
   </div>
 </nav>
 

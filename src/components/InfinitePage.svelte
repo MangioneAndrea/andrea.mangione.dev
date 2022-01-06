@@ -3,13 +3,13 @@
   import Stacks from "./InfiniteParts/Stacks.svelte";
 </script>
 
-<div id="whoAmI">
-  <Stacks />
+<div>
   <Projects />
+  <Stacks />
 </div>
 
 <style type="text/scss">
-  div#whoAmI {
+  div {
     min-height: calc(100% - 4rem);
     background-color: #772f1a;
     padding-top: 4rem;
