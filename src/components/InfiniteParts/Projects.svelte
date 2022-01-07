@@ -1,6 +1,6 @@
 <script>
-  import KotlinFirmata from "./Projects/KotlinFirmata.svelte";
-  import AirHockey from "./Projects/AirHockey.svelte";
+  import KotlinFirmata from "./Projects/KotlinFirmata/KotlinFirmata.svelte";
+  import AirHockey from "./Projects/AirHockey/AirHockey.svelte";
 </script>
 
 <div id="projects">

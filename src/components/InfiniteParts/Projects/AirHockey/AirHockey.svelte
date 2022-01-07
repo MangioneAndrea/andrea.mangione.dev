@@ -1,8 +1,6 @@
 <script>
-  import CodeEditor from "../../../elements/codeEditor/CodeEditor.svelte";
-  import LanguageList from "../../../elements/containers/LanguageList.svelte";
+  import LanguageList from "../../../../elements/containers/LanguageList.svelte";
   import Go from "devicon/icons/go/go-original-wordmark.svg";
-  import FaArrowRight from "svelte-icons/fa/FaArrowRight.svelte";
 </script>
 
 <div class="root">
