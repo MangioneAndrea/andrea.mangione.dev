@@ -30,8 +30,8 @@
     // Connect arduino with custom connection
     firmata = Firmata(connection);
 
-    // Initialize pin 11 as led
-    val led = firmata!!.PWMLed(11);
+    // Initialize pin 7 as led
+    val led = firmata!!.Led(7);
 
     // Setup on buttons clicks
     buttonOn.setOnClickListener { led.turnOn() }
