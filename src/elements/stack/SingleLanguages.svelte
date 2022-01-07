@@ -8,7 +8,7 @@
   let showndescription = description;
 
   const maxWiggleX = 3;
-  const maxWiggleY = 20;
+  const maxWiggleY = 5;
   const imageSize = 75;
   const svgSize = imageSize * 2.6;
   const imageSizePerc = ((imageSize * 2) / svgSize) * 100 + "%";
