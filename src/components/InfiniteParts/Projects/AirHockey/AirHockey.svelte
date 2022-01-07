@@ -4,7 +4,9 @@
 </script>
 
 <div class="root">
-  <h2>AirHockey</h2>
+  <a href="https://github.com/MangioneAndrea/airhockey" target="_blank">
+    AirHockey
+  </a>
   <LanguageList icons={[Go]} />
   <p>
     Small Project which creates a network replicated game example. Basically a
@@ -13,11 +15,11 @@
     Many sessions are available
   </p>
   <div class="example">
-    <img src="img/airhockey.gif" alt="background image" />
+    <img src="img/airhockey.gif" alt="airhockey client" />
     <img
       id="airhockey-server"
       src="img/airhockey-server.png"
-      alt="background image"
+      alt="airhockey server"
     />
   </div>
 </div>
@@ -28,8 +30,10 @@
     @media only screen and (max-width: 768px) {
       margin: 1rem;
     }
-    h2 {
-      margin-bottom: 0;
+    a {
+      font-size: 2em;
+      color: white;
+      text-decoration: underline;
     }
     div.example {
       display: flex;

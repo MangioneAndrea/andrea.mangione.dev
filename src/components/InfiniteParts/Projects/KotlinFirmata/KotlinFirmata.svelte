@@ -6,11 +6,12 @@
   import ArduinoSketch from "./ArduinoSketch.svelte";
   import FaArrowRight from "svelte-icons/fa/FaArrowRight.svelte";
   import FaArrowDown from "svelte-icons/fa/FaArrowDown.svelte";
-
 </script>
 
 <div class="root">
-  <h2>Kotlin firmata</h2>
+  <a href="https://github.com/MangioneAndrea/kotlin-firmata" target="_blank">
+    Kotlin firmata
+  </a>
   <LanguageList icons={[Kotlin, Arduino]} />
   <p>
     This project helps you create arduino projects without c knowledge allowing
@@ -60,8 +61,10 @@
     @media only screen and (max-width: 768px) {
       margin: 1rem;
     }
-    h2 {
-      margin-bottom: 0;
+    a {
+      font-size: 2em;
+      color: white;
+      text-decoration: underline;
     }
     div.example {
       display: flex;
