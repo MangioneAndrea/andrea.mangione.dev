@@ -4,7 +4,8 @@
   import Compy from "../elements/compy/Compy.svelte";
   import FaLinkedin from "svelte-icons/fa/FaLinkedin.svelte";
   import FaGithub from "svelte-icons/fa/FaGithub.svelte";
-  import { github, linkedin, email } from "../utils/External";
+  import FaAddressCard from "svelte-icons/fa/FaAddressCard.svelte";
+  import { github, linkedin, email, cv } from "../utils/External";
   import Flag from "../utils/Flags.svelte";
   import FaEnvelope from "svelte-icons/fa/FaEnvelope.svelte";
 
@@ -40,14 +41,17 @@
         share our experiences and see other's points of view
       </p>
       <div class="linkscontainer">
-        <a class="sprite github" href={github}>
+        <a class="sprite github" href={github} target="_blank">
           <FaGithub />
         </a>
-        <a class="sprite linkedin" href={linkedin}>
+        <a class="sprite linkedin" href={linkedin} target="_blank">
           <FaLinkedin />
         </a>
-        <a class="sprite email" href={email}>
+        <a class="sprite email" href={email} target="_blank">
           <FaEnvelope />
+        </a>
+        <a class="sprite github" href={cv} target="_blank">
+          <FaAddressCard />
         </a>
       </div>
     </div>
