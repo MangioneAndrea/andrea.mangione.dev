@@ -1,21 +1,13 @@
 <script>
   import "./helpers/CommonFunctions";
-  import TopBar from "./components/TopBar.svelte";
-  import FirstPage from "./components/FirstPage.svelte";
-  import InfinitePage from "./components/InfinitePage.svelte";
-  import "./helpers/CommonFunctions";
-  import Footer from "./components/Footer.svelte";
+  import World from "./world/World.svelte";
 </script>
 
 <svelte:head>
   <title>Andrea's Portfolio</title>
 </svelte:head>
 
-<TopBar />
-<FirstPage />
-
-<InfinitePage />
-<Footer />
+<World />
 <main />
 <footer />
 
