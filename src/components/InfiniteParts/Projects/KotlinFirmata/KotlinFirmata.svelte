@@ -23,20 +23,20 @@
       <CodeEditor
         code={`
     // Android example
-
-    // Retreive buttons from the android application
-    val buttonOn = (root.findViewById(R.id.button1) as Button)
-    val buttonOff = (root.findViewById(R.id.button2) as Button)
+    
+    // Retreive switch from the android application
+    val switch = (root.findViewById(R.id.switch) as Switch)
 
     // Connect arduino with custom connection
     firmata = Firmata(connection);
 
     // Initialize pin 7 as led
-    val led = firmata!!.Led(7);
+    val led = firmata!!.PWMLed(7);
 
-    // Setup on buttons clicks
-    buttonOn.setOnClickListener { led.turnOn() }
-    buttonOff.setOnClickListener { led.turnOff() }
+    // switch logic
+    switch.setOnCheckedChangeListener { _, isChecked ->
+        if (isChecked) led.turnOn() else led.turnOff()
+    }
         `}
         language="kotlin"
       />
