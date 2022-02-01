@@ -40,7 +40,7 @@
       stroke="none"
       fill="#78623b"
       fill-rule="evenodd"
-    /></g
-  >
-  </svg
->
+    />
+  </g>
+  <slot />
+</svg>

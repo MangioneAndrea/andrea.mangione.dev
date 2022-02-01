@@ -34,4 +34,5 @@
     box-sizing: border-box;
     text-rendering: optimizeLegibility;
   }
+  
 </style>
