@@ -10,9 +10,10 @@
   const trees = [Tree1, Tree2, Tree3, Tree4, Tree5, Tree6, Tree7, Tree8];
 
   export let tree = Math.floor(Math.random() * 8);
-  export let right = 0;
-  export let top = 100;
+  export let left = 0;
+  export let bottom = "100px";
   export let width = 150;
+  export let height = 800;
 
   const woodShadow = "#813b1a";
   const wood = "#b35825";
@@ -25,12 +26,12 @@
 
 <svg
   style={`
-        position: fixed;
-        right: ${right}px;
-        top: ${top}px;
+        position: absolute;
+        left: ${left};
+        bottom: ${bottom};
         `}
   xml:space="preserve"
-  height="800"
+  {height}
   viewBox="1000 500 1029.3333 1800"
   ><defs id="defs6" /><sodipodi:namedview
     pagecolor="#ffffff"

@@ -1,6 +1,6 @@
 <script>
-  export let right = 200;
-  export let top = 560;
+  export let left = 0;
+  export let bottom = "100px";
   export let width = 150;
 </script>
 
@@ -9,13 +9,11 @@
   y="0px"
   style={`
     enable-background:new 0 0 187.322 187.322;
-      position: fixed;
-      right: ${right}px;
-      top: ${top}px;
-      width: ${width}px;
+    position:absolute;
+      left: ${left};
+      bottom: ${bottom};
       `}
-  width="400"
-  height="300.1733102253033"
+  {width}
   viewBox="0, 0, 400,300.1733102253033"
   ><g id="svgg"
     ><path
@@ -43,5 +41,6 @@
       fill="#78623b"
       fill-rule="evenodd"
     /></g
-  ></svg
+  >
+  </svg
 >
