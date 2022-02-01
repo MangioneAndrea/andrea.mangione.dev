@@ -28,13 +28,15 @@
   <div id="sky" />
 
   <div id="terrain" />
-  <h1>
-    Hi I'm Andrea<br /><br />
-    Part-time Student<br />
-    Lifelong Developer
-  </h1>
+  <header>
+    <h1>Hi I'm Andrea</h1>
+    <h2>
+      Part-time Student<br />
+      Lifelong Developer
+    </h2>
+  </header>
 
-  <Cloud />
+  <Cloud left="10rem" />
   <Sun />
   <Sign left="30rem" bottom="9%">
     <Arrow x="90px" y="80px" />
@@ -51,12 +53,18 @@
     overflow: scroll;
     scroll-behavior: smooth;
     position: absolute;
-    h1 {
+    header {
       position: absolute;
-      font-family: "Cloud";
       top: 15%;
       width: 400px;
+      font-family: "Cloud";
       text-align: center;
+      h1 {
+        font-size: xxx-large;
+      }
+      h2 {
+        font-size: xx-large;
+      }
     }
 
     div {

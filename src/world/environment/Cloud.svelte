@@ -1,7 +1,7 @@
 <script>
-  export let right = 50;
-  export let top = 30;
-  export let width = 150;
+  export let left = "50px";
+  export let top = "30px";
+  export let width = "150px";
   const white = "#f2f9fe";
   const azure = "#d6f0fd";
 </script>
@@ -9,9 +9,9 @@
 <svg
   style={`
     position: fixed;
-    right: ${right}px;
-    top: ${top}px;
-    width: ${width}px;
+    left: ${left};
+    top: ${top};
+    width: ${width};
     `}
   width="450"
   height="200"
