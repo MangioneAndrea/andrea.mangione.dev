@@ -1,13 +1,16 @@
+<script>
+    import KotlinFirmata from "./kotlin-firmata/KotlinFirmata.svelte";
+</script>
+
 <section>
     <h1>Projects</h1>
-    <h2>Kotlin firmata</h2>
-
+    <KotlinFirmata/>
     <h2>Airhockey</h2>
 </section>
 
 <style>
-    section{
-        margin-top:0;
+    section {
+        margin-top: 0;
     }
 
     img {
