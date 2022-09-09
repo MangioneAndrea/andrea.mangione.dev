@@ -26,3 +26,12 @@ html {
     font-size: 150%;
     color: var(--foreground-color);
 }
+
+
+h1, p {
+    font-family: var(--hand-drawing-font);
+}
+
+p {
+    font-size: 1.5rem;
+}
