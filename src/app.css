@@ -9,7 +9,9 @@
 }
 
 :root {
-    --highlight-background: linear-gradient(90deg, #F5CB5C 0%, #64DA99 50%);
+    --greenish-background: linear-gradient(90deg, #F5CB5C 0%, #64DA99 50%);
+    --blueish-background: linear-gradient(90deg, #b42bf8 0%, #6489da 50%);
+    --reddish-background: linear-gradient(90deg, #fd2323 0%, #da754f 50%);
     --background-color: #1a1a1a;
     --foreground-color: #ffffff;
     --hand-drawing-font: GloriaHallelujah, Arial, sans-serif;
@@ -28,10 +30,20 @@ html {
 }
 
 
-h1, p {
+h1, p, h2 {
     font-family: var(--hand-drawing-font);
 }
 
 p {
     font-size: 1.5rem;
+}
+
+section {
+    max-width: calc(var(--max-width) - 25rem);
+    margin: 10rem auto auto;
+}
+
+h1 {
+    font-size: 4rem;
+    -webkit-text-fill-color: transparent;
 }

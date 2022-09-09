@@ -3,7 +3,7 @@
     export let title;
     export let description;
 
-    const speed = `${4 + Math.random() * 3}s`
+    const speed = `${7 + Math.random() * 3}s`
 
     let circleR = window.innerWidth > 1000 ? 100 : 75;
     const svgSize = circleR * 5;

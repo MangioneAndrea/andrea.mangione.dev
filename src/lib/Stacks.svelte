@@ -2,11 +2,16 @@
     import Stack from "../elements/Stack.svelte";
 </script>
 
-<div id="stacks">
-    <h1>My Stacks</h1>
-    <Stack
-            description="Web frameworks"
-            languages={[
+<section>
+    <h1>My Stack</h1>
+    <p>
+        Nowadays there are tons of technologies we can make use of. I tried to cover all the range
+        that I need to do the job.
+    </p>
+    <div>
+        <Stack
+                description="Web frameworks"
+                languages={[
               {
                 image: "assets/Logos/React.svg",
                 key: "react",
@@ -20,11 +25,11 @@
                 key: "svelte",
               },
             ]}
-    />
+        />
 
-    <Stack
-            description="Server/Standalone"
-            languages={[
+        <Stack
+                description="Server/Standalone"
+                languages={[
               {
                 image: "assets/Logos/Go.svg",
                 key: "Golang",
@@ -37,19 +42,49 @@
                 image: "assets/Logos/NodeJS.svg",
                 key: "Node",
               },
+              {
+                image: "assets/Logos/Rust.svg",
+                key: "asd",
+              },
             ]}
-    />
-</div>
+        />
+    </div>
+    <div>
+        <Stack
+                description="Others"
+                languages={[
+              {
+                image: "assets/Logos/GraphQL.svg",
+                key: "graphql",
+              },
+              {
+                image: "assets/Logos/MongoDB.svg",
+                key: "mongo",
+              },
+              {
+                image: "assets/Logos/Grpc.svg",
+                key: "grpc",
+              },
+            ]}
+        />
+    </div>
+</section>
 
 <style>
-    div#stacks {
+
+    section > div{
+        display: flex;
+        justify-content: space-evenly;
+        max-width: var(--max-width);
         margin: auto;
-        width: 100%;
-        text-align: center;
     }
 
-    div#stacks > h1 {
+    section > h1 {
         font-size: 4.5rem;
         margin: auto;
+    }
+    h1 {
+        background: var(--blueish-background);
+        -webkit-background-clip: text;
     }
 </style>
