@@ -1,11 +1,12 @@
 <script>
     import KotlinFirmata from "./kotlin-firmata/KotlinFirmata.svelte";
+    import AirHockey from "./airhockey/AirHockey.svelte";
 </script>
 
 <section>
     <h1>Projects</h1>
     <KotlinFirmata/>
-    <h2>Airhockey</h2>
+    <AirHockey/>
 </section>
 
 <style>
