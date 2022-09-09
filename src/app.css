@@ -1,0 +1,28 @@
+@font-face {
+    font-family: GloriaHallelujah;
+    src: url('assets/GloriaHallelujah-Regular.ttf');
+}
+
+@font-face {
+    font-family: Inconsolata;
+    src: url('assets/Inconsolata.ttf');
+}
+
+:root {
+    --highlight-background: linear-gradient(90deg, #F5CB5C 0%, #64DA99 50%);
+    --background-color: #1a1a1a;
+    --foreground-color: #ffffff;
+    --hand-drawing-font: GloriaHallelujah, Arial, sans-serif;
+    --terminal-font: Inconsolata, Arial, sans-serif;
+    --max-width: 100rem;
+
+
+    font-size: 120%;
+
+}
+
+html {
+    background-color: var(--background-color);
+    font-size: 150%;
+    color: var(--foreground-color);
+}
