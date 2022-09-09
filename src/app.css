@@ -40,7 +40,7 @@ p {
 
 section {
     max-width: calc(var(--max-width) - 25rem);
-    margin: 10rem auto auto;
+    margin: 8rem auto 2rem auto;
 }
 
 h1 {
