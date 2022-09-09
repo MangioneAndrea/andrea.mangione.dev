@@ -1,8 +1,8 @@
 <script>
-  export let code = "";
-  export let language = "javascript";
   import Prism from "prismjs";
   import "prismjs/components/prism-kotlin";
+  export let code = "";
+  export let language = "javascript";
 
   // creates the prism classes
   $: prismClasses = `language-${language}`;

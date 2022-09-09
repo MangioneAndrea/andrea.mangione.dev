@@ -14,7 +14,7 @@
   const imageSizePerc = ((imageSize * 2) / svgSize) * 100 + "%";
   const imageSizePercFocussed = ((imageSize * 2) / svgSize) * 110 + "%";
 
-  const places = languages.map((language) => {
+  const places = languages?.map((language) => {
     const res = {
       ...language,
       x: svgSize / 2 - imageSize,
@@ -42,39 +42,6 @@
     });
   });
 
-  const focusElement = (place) => {
-    showndescription = place.description;
-    place.imageAnim = anime({
-      targets: place.elem.firstChild,
-      x: svgSize / 2 - imageSize * 1.1,
-      width: imageSizePercFocussed,
-      height: imageSizePercFocussed,
-      opacity: 1,
-      easing: "easeInQuad",
-      duration: 500,
-    });
-    places.forEach((other) => {
-      if (other !== place) {
-        place.imageAnim = anime({
-          targets: other.elem.firstChild,
-          opacity: 0.6,
-          easing: "easeInQuad",
-          duration: 500,
-        });
-      }
-    });
-  };
-  const unfocusElement = (place) => {
-    showndescription = description;
-    place.imageAnim = anime({
-      targets: place.elem.firstChild,
-      x: svgSize / 2 - imageSize,
-      width: imageSizePerc,
-      height: imageSizePerc,
-      easing: "easeInQuad",
-      duration: 500,
-    });
-  };
 </script>
 
 <div class="singleLanguages">
@@ -102,8 +69,6 @@
           height={imageSizePerc}
           fill="none"
           pointer-events="visible"
-          on:mouseenter={() => focusElement(place)}
-          on:mouseleave={() => unfocusElement(place)}
         />
       </g>
     </svg>

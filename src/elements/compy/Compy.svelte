@@ -1,6 +1,7 @@
 <script>
   import anime from "animejs";
   import { onMount } from "svelte";
+
   import { asyncAnime } from "../../helpers/AnimeExtention";
 
   import {
