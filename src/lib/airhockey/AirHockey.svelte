@@ -1,10 +1,12 @@
 <script>
+import LanguageList from "../../elements/containers/LanguageList.svelte";
 </script>
 
 <div class="root">
-    <a href="https://github.com/MangioneAndrea/airhockey" target="_blank">
+    <a href="https://github.com/MangioneAndrea/airhockey" target="_blank" class="projectTitle">
         <h2>Airhockey</h2>
     </a>
+    <LanguageList icons={["assets/Logos/Go.svg", "assets/Logos/Grpc.svg"]}/>
     <p>
         Small Project which creates a network replicated game example. Basically a
         multiplayer game :)<br/>

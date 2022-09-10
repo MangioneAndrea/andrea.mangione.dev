@@ -34,6 +34,11 @@ h1, p, h2 {
     font-family: var(--hand-drawing-font);
 }
 
+h2 {
+    margin-bottom: 1rem;
+    width: auto;
+}
+
 p {
     font-size: 1.5rem;
 }
@@ -46,4 +51,13 @@ section {
 h1 {
     font-size: 4rem;
     -webkit-text-fill-color: transparent;
+}
+
+.projectTitle {
+    display: block;
+    font-size: 2em;
+    color: white;
+    text-decoration: underline;
+    width: fit-content;
+    margin-right: auto;
 }

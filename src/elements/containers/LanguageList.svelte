@@ -1,11 +1,16 @@
 <script>
-  export let icons = [];
-  export let height = 30;
+    export let icons = [];
 </script>
 
 <div>
-  {#each icons as icon}
-    <svelte:component this={icon} {height} />
-  {/each}
+    {#each icons as icon}
+        <img src={icon}/>
+    {/each}
 </div>
 
+<style>
+    img {
+        height: 1rem;
+        padding: 0 .5rem;
+    }
+</style>

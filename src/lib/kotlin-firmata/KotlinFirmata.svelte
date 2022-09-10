@@ -1,14 +1,14 @@
 <script>
-    // import LanguageList from "../../../../elements/containers/LanguageList.svelte";
-    //import Arduino from "devicon/icons/arduino/arduino-original.svg";
     import ArduinoSketch from "./ArduinoSketch.svelte";
     import CodeEditor from "../../elements/codeEditor/CodeEditor.svelte";
+    import LanguageList from "../../elements/containers/LanguageList.svelte";
 </script>
 
 <div class="root">
-    <a href="https://github.com/MangioneAndrea/kotlin-firmata" target="_blank">
-        <h2>Kotlin firmata</h2>
+    <a href="https://github.com/MangioneAndrea/kotlin-firmata" target="_blank" class="projectTitle">
+        <h2>Kotlin firmata </h2>
     </a>
+    <LanguageList icons={["assets/Logos/KotlinBig.svg", "assets/Logos/Arduino.svg"]}/>
     <p>
         This project helps you create arduino projects without c knowledge allowing
         multiplatforming. As kotlin is the main language for android native apps, it
@@ -52,11 +52,6 @@
         }
     }
 
-    a {
-        font-size: 2em;
-        color: white;
-        text-decoration: underline;
-    }
 
     div.example {
         display: flex;
