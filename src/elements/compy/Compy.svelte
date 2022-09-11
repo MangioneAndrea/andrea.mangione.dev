@@ -1,15 +1,12 @@
 <script>
-  import anime from "animejs";
   import { onMount } from "svelte";
-
-  import { asyncAnime } from "../../helpers/AnimeExtention";
 
   import {
     debounce,
     clamp,
     getIdealCurve,
     deferAsync,
-  } from "../../helpers/CommonFunctions";
+  } from "../../helpers/CommonFunctions.js";
 
   let leftPupil, rightPupil;
   let leftEye, rightEye;
@@ -51,6 +48,7 @@
   };
 
   const wink = deferAsync(async () => {
+    /*
     await asyncAnime({
       targets: rightHand,
       direction: "alternate",
@@ -61,6 +59,7 @@
       loop: 10,
       update: adaptArm,
     });
+    */
   });
 
   onMount(() => {
@@ -68,48 +67,46 @@
     wink();
   });
 
+  let pupilLeft = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
+  let pupilRight = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
+
   const resetEyes = debounce(() => {
-    anime({
-      targets: leftPupil,
-      x: 25,
-      y: 43,
-      easing: "linear",
-      duration: 200,
-    });
-    anime({
-      targets: rightPupil,
-      x: 67,
-      y: 43,
-      easing: "linear",
-      duration: 200,
-    });
+    console.log("resetting")
+    pupilLeft = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
+    pupilRight = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
   }, 1000);
 
+  $: console.log(pupilLeft, pupilRight);
+
   const moveEye = (_x, _y, eye, pup) => {
-    const x = eye.x.baseVal.value;
-    const y = eye.y.baseVal.value;
-    window.eye = eye;
     const differenceX = eye.getBoundingClientRect().x;
     const differenceY = eye.getBoundingClientRect().y;
+
     const width = eye.getBoundingClientRect().width;
     const height = eye.getBoundingClientRect().height;
+
+    const centerX = width / 2 + differenceX;
+    const centerY = height / 2 + differenceY;
+
     const pWidth = pup.getBoundingClientRect().width;
     const pHeight = pup.getBoundingClientRect().height;
-    anime({
-      targets: pup,
-      x: clamp(_x - differenceX + pWidth * 2, x, x + width - pWidth),
-      y: clamp(_y - differenceY + pHeight * 2, y, y + height - pHeight),
-      easing: "linear",
-      duration: 30,
-    });
+
+    const xBound = (width - pWidth) / 2;
+    const yBound = height - pHeight;
+
+    const tx = Math.round(clamp(_x - centerX, -xBound, xBound));
+    const ty = Math.round(clamp(_y - centerY + pHeight / 2, 0, yBound));
+
+    return `--pupil-x: ${tx}px; --pupil-y: ${ty}px;`;
   };
 
   document.addEventListener("mousemove", (evt) => {
-    moveEye(evt.clientX, evt.clientY, leftEye, leftPupil, 315);
-    moveEye(evt.clientX, evt.clientY, rightEye, rightPupil, 357);
+    pupilLeft = moveEye(evt.clientX, evt.clientY, leftEye, leftPupil);
+    pupilRight = moveEye(evt.clientX, evt.clientY, rightEye, rightPupil);
     resetEyes();
   });
   document.addEventListener("touchstart", (e) => {
+    /*
     moveEye(
       e.touches[0].clientX,
       e.touches[0].clientY,
@@ -124,6 +121,7 @@
       rightPupil,
       357
     );
+    */
   });
 
   let width;
@@ -134,9 +132,8 @@
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="195"
+  width="200"
   height="200"
-  viewBox={width < 768 ? "-200 -180 400 400" : undefined}
   bind:this={main}
   on:click={wink}
 >
@@ -148,13 +145,13 @@
       <!-- Face -->
       <rect width="88" height="50" x="8" y="32" class="face" rx="5" />
       <!-- Left eye -->
-      <g>
+      <g style={pupilLeft}>
         <rect x="17" y="43" class="eye" bind:this={leftEye} rx="5" />
         <!-- Left pupil -->
         <rect x="25" y="43" class="pupil" bind:this={leftPupil} />
       </g>
       <!-- Right eye -->
-      <g>
+      <g style={pupilRight}>
         <rect x="59" y="43" class="eye" bind:this={rightEye} rx="5" />
         <!-- Right pupil -->
         <rect x="67" y="43" class="pupil" bind:this={rightPupil} />
@@ -179,8 +176,8 @@
       <rect width="55" height="63" class="skin" />
     </g>
   </defs>
-  <use x="50" href="#head" />
-  <use x="75" y="84" href="#body" id="body" bind:this={body} />
+  <use x="0" y="0" href="#head" />
+  <use x="25" y="84" href="#body" id="body" bind:this={body} />
   <path
     fill="transparent"
     stroke="black"
@@ -193,36 +190,54 @@
     stroke-width="4"
     bind:this={leftArm}
   />
-  <use x="160" y="37" href="#hand" id="rightHand" bind:this={rightHand} />
+  <use x="110" y="37" href="#hand" id="rightHand" bind:this={rightHand} />
 </svg>
 
-<style type="text/scss">
+<style>
+  @keyframes movep {
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(var(--pupil-x), var(--pupil-y));
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  .pupil {
+    transform: translate(var(--pupil-x), var(--pupil-y));
+  }
+
   svg {
-    position: relative;
+    position: fixed;
     background-color: transparent;
-    .face {
-      fill: #9fbc4d;
-    }
-    .hand {
-      fill: #9fbc4d;
-    }
-    .hair {
-      transform-box: fill-box;
-      transform-origin: center;
-      transform: rotate(45deg);
-    }
-    .eye {
-      width: 25px;
-      height: 27px;
-      fill: #ffffff;
-    }
-    .pupil {
-      width: 9px;
-      height: 16px;
-      fill: #000000;
-    }
-    .skin {
-      fill: #383c2c;
-    }
+  }
+  svg .face {
+    fill: #9fbc4d;
+  }
+  svg .hand {
+    fill: #9fbc4d;
+  }
+  svg .hair {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: rotate(45deg);
+  }
+  svg .eye {
+    width: 25px;
+    height: 27px;
+    fill: #ffffff;
+  }
+  svg .pupil {
+    width: 9px;
+    height: 16px;
+    fill: #000000;
+    transition: all linear .2s;
+    -webkit-backface-visibility: hidden;
+  }
+  svg .skin {
+    fill: #383c2c;
   }
 </style>

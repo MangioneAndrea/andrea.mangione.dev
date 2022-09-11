@@ -1,11 +1,11 @@
 @font-face {
     font-family: GloriaHallelujah;
-    src: url('GloriaHallelujah-Regular.ttf');
+    src: url('assets/GloriaHallelujah-Regular.ttf');
 }
 
 @font-face {
     font-family: Inconsolata;
-    src: url('Inconsolata.ttf');
+    src: url('assets/Inconsolata.ttf');
 }
 
 :root {
