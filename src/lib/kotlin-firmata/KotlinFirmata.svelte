@@ -59,7 +59,7 @@
         align-items: center;
     }
 
-    @media only screen and (max-width: 768px) {
+    @media (max-width: 1366px) {
         div.example {
             flex-direction: column;
         }
