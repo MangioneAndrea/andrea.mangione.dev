@@ -13,6 +13,8 @@
   let rightHand;
   let rightArm, leftArm;
   let body, main;
+
+  let compyRight = 0;
   const adaptArm = () => {
     rightArm.setAttribute(
       "d",
@@ -48,18 +50,13 @@
   };
 
   const wink = deferAsync(async () => {
-    /*
-    await asyncAnime({
-      targets: rightHand,
-      direction: "alternate",
-      x: 190,
-      easing: "linear",
-      duration: 200,
-      rotate: 9,
-      loop: 10,
-      update: adaptArm,
-    });
-    */
+    let random = compyRight;
+
+    while (Math.abs(random - compyRight) < 30) {
+      random = Math.random() * 100;
+    }
+
+    compyRight = random;
   });
 
   onMount(() => {
@@ -71,28 +68,26 @@
   let pupilRight = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
 
   const resetEyes = debounce(() => {
-    console.log("resetting")
+    console.log("resetting");
     pupilLeft = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
     pupilRight = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
   }, 1000);
 
-  $: console.log(pupilLeft, pupilRight);
-
   const moveEye = (_x, _y, eye, pup) => {
-    const differenceX = eye.getBoundingClientRect().x;
-    const differenceY = eye.getBoundingClientRect().y;
+    const eyeX = eye.getBoundingClientRect().x;
+    const eyeY = eye.getBoundingClientRect().y;
 
-    const width = eye.getBoundingClientRect().width;
-    const height = eye.getBoundingClientRect().height;
-
-    const centerX = width / 2 + differenceX;
-    const centerY = height / 2 + differenceY;
+    const eyeW = eye.getBoundingClientRect().width;
+    const eyeH = eye.getBoundingClientRect().height;
 
     const pWidth = pup.getBoundingClientRect().width;
     const pHeight = pup.getBoundingClientRect().height;
 
-    const xBound = (width - pWidth) / 2;
-    const yBound = height - pHeight;
+    const centerX = eyeW / 2 + eyeX;
+    const centerY = eyeH / 2 + eyeY;
+
+    const xBound = (eyeW - pWidth) / 2;
+    const yBound = eyeH - pHeight;
 
     const tx = Math.round(clamp(_x - centerX, -xBound, xBound));
     const ty = Math.round(clamp(_y - centerY + pHeight / 2, 0, yBound));
@@ -104,24 +99,6 @@
     pupilLeft = moveEye(evt.clientX, evt.clientY, leftEye, leftPupil);
     pupilRight = moveEye(evt.clientX, evt.clientY, rightEye, rightPupil);
     resetEyes();
-  });
-  document.addEventListener("touchstart", (e) => {
-    /*
-    moveEye(
-      e.touches[0].clientX,
-      e.touches[0].clientY,
-      leftEye,
-      leftPupil,
-      315
-    );
-    moveEye(
-      e.touches[0].clientX,
-      e.touches[0].clientY,
-      rightEye,
-      rightPupil,
-      357
-    );
-    */
   });
 
   let width;
@@ -136,6 +113,7 @@
   height="200"
   bind:this={main}
   on:click={wink}
+  style="--compy-right: {compyRight}%;"
 >
   <defs>
     <!-- Head-->
@@ -194,25 +172,17 @@
 </svg>
 
 <style>
-  @keyframes movep {
-    100% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(var(--pupil-x), var(--pupil-y));
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-
   .pupil {
     transform: translate(var(--pupil-x), var(--pupil-y));
   }
 
   svg {
-    position: fixed;
+    position: absolute;
+    right: var(--compy-right);
+    transform: translateX(calc(var(--compy-right) + 1.5rem));
+    top: 10%;
     background-color: transparent;
+    transition: all ease-in-out 0.2s;
   }
   svg .face {
     fill: #9fbc4d;
@@ -234,8 +204,9 @@
     width: 9px;
     height: 16px;
     fill: #000000;
-    transition: all linear .2s;
+    transition: all linear 0.2s;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   svg .skin {
     fill: #383c2c;

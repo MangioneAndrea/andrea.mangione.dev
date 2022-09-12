@@ -1,25 +1,44 @@
+<script>
+  import Compy from "../elements/compy/Compy.svelte";
+</script>
+
 <section>
+  <div class="titleContainer">
     <h1>About me</h1>
-    <p>
-        I'm a Switzerland-based developer. Currently working at <b>Jacando AG</b> but always open for any kind of
-        project.
-        <br/>
-        I love wandering all over the world and I'm also trying to see as many places as possible. I speak 4 languages:
-        <img src={"assets/Flags/it.svg"}/>, <img src={"assets/Flags/gb.svg"}/>
-        and <img src={"assets/Flags/de.svg"}/> / <img src={"assets/Flags/ch.svg"}/>
-        <br/><br/>
-        ... Did I already say I love creating animations and interactivity?
-    </p>
+    <div class="compySpace">
+      <Compy />
+    </div>
+  </div>
+  <p>
+    I'm a Switzerland-based developer. Currently working at <b>Jacando AG</b>
+    but always open for any kind of project.
+    <br />
+    I love wandering all over the world and I'm also trying to see as many places
+    as possible. I speak 4 languages:
+    <img src={"assets/Flags/it.svg"} />, <img src={"assets/Flags/gb.svg"} />
+    and <img src={"assets/Flags/de.svg"} /> /
+    <img src={"assets/Flags/ch.svg"} />
+    <br /><br />
+    ... Did I already say I love creating animations and interactivity?
+  </p>
 </section>
 
 <style>
+  img {
+    height: 1.5rem;
+  }
 
-    img {
-        height: 1.5rem;
-    }
+  h1 {
+    background: var(--greenish-background);
+    -webkit-background-clip: text;
+  }
+  .titleContainer {
+    position: relative;
+    display: flex;
+  }
 
-    h1 {
-        background: var(--greenish-background);
-        -webkit-background-clip: text;
-    }
+  .compySpace {
+    flex: 1;
+    position:relative;
+  }
 </style>
