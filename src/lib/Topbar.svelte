@@ -19,6 +19,7 @@
 <style>
 
     div {
+        z-index: 10;
         top:0;
         padding-top: 1rem;
         position: fixed;
