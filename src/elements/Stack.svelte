@@ -44,9 +44,9 @@
 
 <div class="stack">
     <div class="description">
-        <p class="defaultDescription">
+        <h2 class="defaultDescription">
             {description}
-        </p>
+        </h2>
     </div>
     <div class="svgContainer">
         <svg width={svgSize} height={svgSize}>
@@ -164,7 +164,7 @@
         div.stack > div.description {
             max-width: 100%;
             margin: auto;
-            margin-bottom: 50px;
+            margin-bottom: 0;
         }
     }
 
