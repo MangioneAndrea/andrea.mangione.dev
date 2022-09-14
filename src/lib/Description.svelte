@@ -31,6 +31,7 @@
   h1 {
     background: var(--greenish-background);
     -webkit-background-clip: text;
+    background-clip: text;
   }
   .titleContainer {
     position: relative;
@@ -39,6 +40,12 @@
 
   .compySpace {
     flex: 1;
-    position:relative;
+    position: relative;
+  }
+
+  @media only screen and (max-width: 1366px) {
+    .compySpace {
+      display: none;
+    }
   }
 </style>

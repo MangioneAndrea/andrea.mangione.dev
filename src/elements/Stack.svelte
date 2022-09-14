@@ -1,6 +1,5 @@
 <script lang="ts">
     export let languages;
-    export let title;
     export let description;
 
     const speed = `${7 + Math.random() * 3}s`

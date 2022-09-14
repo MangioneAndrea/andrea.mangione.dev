@@ -1,63 +1,67 @@
 @font-face {
-    font-family: GloriaHallelujah;
-    src: url('assets/GloriaHallelujah-Regular.ttf');
+  font-family: GloriaHallelujah;
+  src: url("assets/GloriaHallelujah-Regular.ttf");
 }
 
 @font-face {
-    font-family: Inconsolata;
-    src: url('assets/Inconsolata.ttf');
+  font-family: Inconsolata;
+  src: url("assets/Inconsolata.ttf");
 }
 
 :root {
-    --greenish-background: linear-gradient(90deg, #F5CB5C 0%, #64DA99 50%);
-    --blueish-background: linear-gradient(90deg, #b42bf8 0%, #6489da 50%);
-    --reddish-background: linear-gradient(90deg, #fd2323 0%, #da754f 50%);
-    --background-color: #1a1a1a;
-    --foreground-color: #ffffff;
-    --hand-drawing-font: GloriaHallelujah, Arial, sans-serif;
-    --terminal-font: Inconsolata, Arial, sans-serif;
-    --max-width: 100rem;
+  --greenish-background: linear-gradient(90deg, #f5cb5c 0%, #64da99 50%);
+  --blueish-background: linear-gradient(90deg, #b42bf8 0%, #6489da 50%);
+  --reddish-background: linear-gradient(90deg, #fd2323 0%, #da754f 50%);
+  --background-color: #1a1a1a;
+  --foreground-color: #ffffff;
+  --hand-drawing-font: GloriaHallelujah, Arial, sans-serif;
+  --terminal-font: Inconsolata, Arial, sans-serif;
+  --max-width: 100rem;
 
-
-    font-size: 120%;
-
+  font-size: 120%;
 }
 
 html {
-    background-color: var(--background-color);
-    font-size: 150%;
-    color: var(--foreground-color);
+  background-color: var(--background-color);
+  font-size: 150%;
+  color: var(--foreground-color);
 }
 
-
-h1, p, h2 {
-    font-family: var(--hand-drawing-font);
+h1,
+p,
+h2 {
+  font-family: var(--hand-drawing-font);
 }
 
 h2 {
-    margin-bottom: 1rem;
-    width: auto;
+  margin-bottom: 1rem;
+  width: auto;
 }
 
 p {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
+  text-align: justify;
+  margin: 0 1rem;
 }
 
 section {
-    max-width: calc(var(--max-width) - 25rem);
-    margin: 8rem auto 2rem auto;
+  max-width: calc(var(--max-width) - 25rem);
+  margin: 8rem auto 2rem auto;
 }
 
 h1 {
-    font-size: 4rem;
-    -webkit-text-fill-color: transparent;
+  font-size: 4rem;
+  margin-bottom: 0.2rem;
+  -webkit-text-fill-color: transparent;
 }
-
-.projectTitle {
-    display: block;
-    font-size: 2em;
-    color: white;
-    text-decoration: underline;
-    width: fit-content;
-    margin-right: auto;
+@media only screen and (max-width: 1366px) {
+  section{
+    margin: 2rem auto 2rem auto;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  p{
+    font-size: 1rem;
+  }
 }
