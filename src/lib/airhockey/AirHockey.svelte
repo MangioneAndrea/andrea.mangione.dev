@@ -38,11 +38,6 @@
     }
   }
 
-  a {
-    font-size: 2em;
-    color: white;
-    text-decoration: underline;
-  }
 
   div.example {
     display: flex;
