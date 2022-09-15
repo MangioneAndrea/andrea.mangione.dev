@@ -52,13 +52,17 @@
     width: 70%;
   }
 
+  video {
+    width: 50%;
+  }
+
   @media only screen and (max-width: 1366px) {
     div.example {
       flex-direction: column;
     }
 
     @media only screen and (max-width: 768px) {
-      img {
+      img, video {
         width: 90%;
         margin-bottom: 1rem;
       }
