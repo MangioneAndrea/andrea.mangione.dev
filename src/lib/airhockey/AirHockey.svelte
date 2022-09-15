@@ -22,11 +22,6 @@
       <source src="assets/Images/airhockey.webm" type="video/webm">
         Your browser does not support the video tag.
     </video>
-    <img
-      id="airhockey-server"
-      src="assets/Images/airhockey-server.png"
-      alt="airhockey server"
-    />
   </div>
 </div>
 
@@ -44,12 +39,8 @@
 
   div.example {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-  }
-
-  #airhockey-server {
-    width: 70%;
   }
 
   video {
@@ -62,7 +53,7 @@
     }
 
     @media only screen and (max-width: 768px) {
-      img, video {
+      video {
         width: 90%;
         margin-bottom: 1rem;
       }

@@ -168,11 +168,8 @@
         }
     }
 
-    div.stack > p {
-        height: 0;
-    }
-
     div.stack > .svgContainer {
+        will-change: transform;
         text-align: center;
     }
 </style>

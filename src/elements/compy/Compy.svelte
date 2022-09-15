@@ -173,10 +173,12 @@
 
 <style>
   .pupil {
+    will-change: transform;
     transform: translate(var(--pupil-x), var(--pupil-y));
   }
 
   svg {
+    will-change: transform;
     position: absolute;
     right: var(--compy-right);
     transform: translateX(calc(var(--compy-right) + 1.5rem));
