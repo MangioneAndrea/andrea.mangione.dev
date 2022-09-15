@@ -18,7 +18,10 @@
     Many sessions are available
   </p>
   <div class="example">
-    <img src="assets/Images/airhockey.gif" alt="airhockey client" />
+    <video autoplay loop muted>
+      <source src="assets/Images/airhockey.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
     <img
       id="airhockey-server"
       src="assets/Images/airhockey-server.png"
