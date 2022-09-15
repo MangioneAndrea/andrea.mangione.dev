@@ -5,16 +5,16 @@
   <h2>andrea.mangione.dev</h2>
   <span>
     <a href="https://github.com/MangioneAndrea" target="_blank">
-      <img src={"assets/Logos/Github.png"} />
+      <img src={"assets/Logos/Github.webp"} alt="github link" />
     </a>
     <a
       href="https://www.linkedin.com/in/andrea-mangione-592902156/"
       target="_blank"
     >
-      <img src={"assets/Logos/Linkedin.png"} />
+      <img src={"assets/Logos/Linkedin.webp"} alt="linkedin link"  />
     </a>
-    <a href="mailto:andrea@mangione.dev" target="_blank">
-      <img src={"assets/Logos/Email.png"} />
+    <a href="mailto:andrea@mangione.dev"  target="_blank">
+      <img src={"assets/Logos/Email.webp"} alt="email link" />
     </a>
   </span>
 </div>

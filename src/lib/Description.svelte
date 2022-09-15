@@ -15,9 +15,9 @@
     <br />
     I love wandering all over the world and I'm also trying to see as many places
     as possible. I speak 4 languages:
-    <img src={"assets/Flags/it.svg"} />, <img src={"assets/Flags/gb.svg"} />
-    and <img src={"assets/Flags/de.svg"} /> /
-    <img src={"assets/Flags/ch.svg"} />
+    <img src={"assets/Flags/it.svg"} alt="italian flag" />, <img src={"assets/Flags/gb.svg"}  alt="uk flag"/>
+    and <img src={"assets/Flags/de.svg"}  alt="german flag"/> /
+    <img src={"assets/Flags/ch.svg"}  alt="swiss flag"/>
     <br /><br />
     ... Did I already say I love creating animations and interactivity?
   </p>
