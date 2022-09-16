@@ -6,13 +6,19 @@
     clamp,
     getIdealCurve,
     deferAsync,
+    sleep,
+    defer,
   } from "../../helpers/CommonFunctions.js";
+  import Description from "../../lib/Description.svelte";
+  import Ball from "./Ball.svelte";
 
   let leftPupil, rightPupil;
   let leftEye, rightEye;
   let rightHand;
   let rightArm, leftArm;
   let body, main;
+
+  const balls = new Set();
 
   let compyRight = 0;
   const adaptArm = () => {
@@ -49,7 +55,7 @@
     );
   };
 
-  const wink = deferAsync(async () => {
+  const teleport = deferAsync(async () => {
     let random = compyRight;
 
     while (Math.abs(random - compyRight) < 30) {
@@ -59,21 +65,51 @@
     compyRight = random;
   });
 
-  onMount(() => {
-    adaptArm();
-    wink();
-  });
+  const left = {
+    targetX: 0,
+    currentX: 0,
+    targetY: 0,
+    currentY: 0,
+  };
 
-  let pupilLeft = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
-  let pupilRight = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
+  const right = {
+    targetX: 0,
+    currentX: 0,
+    targetY: 0,
+    currentY: 0,
+  };
+
+  let pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`;
+  let pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`;
 
   const resetEyes = debounce(() => {
-    console.log("resetting");
-    pupilLeft = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
-    pupilRight = `--pupil-x: ${0}px; --pupil-y: ${0}px;`;
+    left.targetX = 0;
+    left.targetY = 0;
+    right.targetX = 0;
+    right.targetY = 0;
   }, 1000);
 
-  const moveEye = (_x, _y, eye, pup) => {
+  new Promise(async () => {
+    while (1) {
+      await sleep(10);
+      if (left.currentX !== left.targetX) {
+        left.currentX += clamp(left.targetX - left.currentX, -1, 1);
+      }
+      if (left.currentY !== left.targetY) {
+        left.currentY += clamp(left.targetY - left.currentY, -1, 1);
+      }
+      if (right.currentX !== right.targetX) {
+        right.currentX += clamp(right.targetX - right.currentX, -1, 1);
+      }
+      if (right.currentY !== right.targetY) {
+        right.currentY += clamp(right.targetY - right.currentY, -1, 1);
+      }
+      pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`;
+      pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`;
+    }
+  });
+
+  const moveEye = (_x, _y, eye, pup, target) => {
     const eyeX = eye.getBoundingClientRect().x;
     const eyeY = eye.getBoundingClientRect().y;
 
@@ -89,22 +125,44 @@
     const xBound = (eyeW - pWidth) / 2;
     const yBound = eyeH - pHeight;
 
-    const tx = Math.round(clamp(_x - centerX, -xBound, xBound));
-    const ty = Math.round(clamp(_y - centerY + pHeight / 2, 0, yBound));
-
-    return `--pupil-x: ${tx}px; --pupil-y: ${ty}px;`;
+    target.targetX = Math.round(clamp(_x - centerX, -xBound, xBound));
+    target.targetY = Math.round(clamp(_y - centerY + pHeight / 2, 0, yBound));
   };
-
-  document.addEventListener("mousemove", (evt) => {
-    pupilLeft = moveEye(evt.clientX, evt.clientY, leftEye, leftPupil);
-    pupilRight = moveEye(evt.clientX, evt.clientY, rightEye, rightPupil);
-    resetEyes();
+  onMount(() => {
+    adaptArm();
+    teleport();
   });
 
-  let width;
+  const onMouseMove = (evt) => {
+    if (!leftEye || !rightEye) return;
+    moveEye(evt.clientX, evt.clientY, leftEye, leftPupil, left);
+    moveEye(evt.clientX, evt.clientY, rightEye, rightPupil, right);
+    resetEyes();
+  };
+
+  const clearBalls = debounce(() => {
+    balls.clear();
+    balls = balls;
+  }, 2000);
+
+  const shootBall = defer((evt) => {
+    const ball = {
+      x: rightHand.getBoundingClientRect().x,
+      y: rightHand.getBoundingClientRect().y,
+      targetX: evt.clientX,
+      targetY: evt.clientY,
+    };
+    balls.add(ball);
+    balls = balls;
+
+    clearBalls();
+  }, 50);
 </script>
 
-<svelte:window bind:innerWidth={width} />
+<svelte:window on:mousemove={onMouseMove} on:mousedown={shootBall} />
+{#each [...balls] as ball}
+  <svelte:component this={Ball} {...ball} />
+{/each}
 <svg
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +170,7 @@
   width="200"
   height="200"
   bind:this={main}
-  on:click={wink}
+  on:click={teleport}
   style="--compy-right: {compyRight}%;"
 >
   <defs>
@@ -206,9 +264,6 @@
     width: 9px;
     height: 16px;
     fill: #000000;
-    transition: all linear 0.2s;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
   }
   svg .skin {
     fill: #383c2c;
