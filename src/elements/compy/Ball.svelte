@@ -12,14 +12,14 @@
   let step1Y = y - 100 - absXDistance * absXDistance;
 
   if (targetY < y) {
-    step1Y = targetY;
+    step1Y = targetY-10;
   }
 
   let currentX = x;
   let currentY = y;
   new Promise(async (resolve) => {
     let t = 200;
-    let secondStep = false;
+    let goingDown = false;
     let xSpeed = (step1X - currentX) / 10;
     let ySpeed = (step1Y - currentY) / 10;
 
@@ -39,19 +39,19 @@
       if (
         Math.abs(currentX - step1X) > 3 &&
         Math.abs(currentY - step1Y) > 3 &&
-        !secondStep
+        !goingDown
       ) {
-        xSpeed = minMax(minSpeed, (xSpeed + (step1X - currentX) / 10) / 2);
+        xSpeed = minMax(0, (xSpeed + (step1X - currentX) / 10) / 2);
         ySpeed = minMax(minSpeed, (ySpeed + (step1Y - currentY) / 10) / 2);
         currentX += xSpeed;
         currentY += ySpeed;
       } else {
-        if (!secondStep) {
-          secondStep = true;
+        if (!goingDown) {
+          goingDown = true;
           accellerationX = (targetX - currentX) / 1000;
-          accellerationY = Math.abs(targetY - currentY) / 1000;
+          accellerationY = Math.abs(Math.sqrt(targetY - currentY) + 500) / 1000;
         }
-        secondStep = true;
+        goingDown = true;
         xSpeed += accellerationX *= 0.9;
         ySpeed += accellerationY;
 
@@ -73,6 +73,8 @@
 />
 
 <style>
+
+
   div {
     position: fixed;
     height: 25px;
@@ -80,5 +82,6 @@
     background-color: #bbb;
     border-radius: 50%;
     z-index: 10;
+    animation: disappear 2s ease-out;
   }
 </style>

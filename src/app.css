@@ -71,3 +71,12 @@ h1 {
     font-size: 1rem;
   }
 }
+
+@keyframes disappear{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
