@@ -43,7 +43,7 @@
     position: relative;
   }
 
-  @media only screen and (max-width: 1366px) {
+  @media only screen and (max-width: 768px) {
     .compySpace {
       display: none;
     }
