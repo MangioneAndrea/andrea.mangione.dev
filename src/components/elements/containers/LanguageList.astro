@@ -1,0 +1,16 @@
+---
+const { icons } = Astro.props;
+---
+
+<div class="flex">
+  {
+    icons.map((icon) => (
+      <img
+        class="p-2 h-8"
+        height="19"
+        src={icon}
+        alt={`language ${icon.split("/").at(-1)}`}
+      />
+    ))
+  }
+</div>
