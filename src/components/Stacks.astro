@@ -1,6 +1,6 @@
-<script>
-  import Stack from "../elements/stack/Stack.svelte";
-</script>
+---
+import Stack from "./elements/stack/Stack.svelte";
+---
 
 <section>
   <h1>My Stack</h1>
@@ -10,6 +10,7 @@
   </p>
   <div>
     <Stack
+      client:only
       description="Web frameworks"
       languages={[
         {
@@ -28,6 +29,7 @@
     />
 
     <Stack
+      client:only
       description="Server/Standalone"
       languages={[
         {
@@ -51,6 +53,7 @@
   </div>
   <div>
     <Stack
+      client:only
       description="Others"
       languages={[
         {

@@ -5,7 +5,7 @@
     const speed = `${7 + Math.random() * 3}s`
 
     let circleR = window.innerWidth > 1000 ? 100 : 75;
-    const svgSize = circleR * 5;
+    const svgSize = circleR * 3;
     const centerAnchor = svgSize / 2;
     const imageSize = ((circleR * 2) / svgSize) * 100 + "%";
     const rotation = 0.2;
@@ -130,6 +130,7 @@
         min-width: 49%;
         margin: auto;
         display: inline-flex;
+        justify-content: space-around;
     }
 
     @media only screen and (max-width: 1000px) {
@@ -137,6 +138,7 @@
         div.stack {
             display: block;
             min-width: 70%;
+            margin-top: 4rem;
         }
     }
 
@@ -154,12 +156,6 @@
         height: fit-content;
     }
 
-    @media only screen and (max-width: 1500px) {
-        div.stack > div.description {
-            margin-bottom: 50%;
-        }
-    }
-
     @media only screen and (max-width: 1000px) {
         div.stack > div.description {
             max-width: 100%;
@@ -171,5 +167,7 @@
     div.stack > .svgContainer {
         will-change: transform;
         text-align: center;
-    }
+        display:flex;
+        justify-content: center;
+}
 </style>

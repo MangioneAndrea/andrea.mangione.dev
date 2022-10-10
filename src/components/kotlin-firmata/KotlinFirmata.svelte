@@ -1,7 +1,7 @@
 <script>
     import ArduinoSketch from "./ArduinoSketch.svelte";
-    import CodeEditor from "../../elements/codeEditor/CodeEditor.svelte";
-    import LanguageList from "../../elements/containers/LanguageList.svelte";
+    import CodeEditor from "../elements/codeEditor/CodeEditor.svelte";
+    import LanguageList from "../elements/containers/LanguageList.svelte";
 </script>
 
 <div class="root">

@@ -8,8 +8,7 @@
     deferAsync,
     sleep,
     defer,
-  } from "../../helpers/CommonFunctions.js";
-  import Description from "../../lib/Description.svelte";
+  } from "../../../helpers/CommonFunctions.js";
   import Ball from "./Ball.svelte";
 
   let leftPupil, rightPupil;
@@ -18,7 +17,7 @@
   let rightArm, leftArm;
   let body, main;
 
-  const balls = new Set();
+  let balls = new Set();
 
   let compyRight = 0;
   const adaptArm = () => {
@@ -167,10 +166,10 @@
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="200"
-  height="200"
+  width="150"
+  height="150"
   bind:this={main}
-  on:click={teleport}
+  on:mouseup={teleport}
   style="--compy-right: {compyRight}%;"
 >
   <defs>
@@ -237,7 +236,6 @@
 
   svg {
     will-change: transform;
-    position: absolute;
     right: var(--compy-right);
     transform: translateX(calc(var(--compy-right) + 1.5rem));
     top: 10%;

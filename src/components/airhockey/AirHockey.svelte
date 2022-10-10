@@ -1,5 +1,5 @@
 <script>
-  import LanguageList from "../../elements/containers/LanguageList.svelte";
+  import LanguageList from "../elements/containers/LanguageList.svelte";
 </script>
 
 <div class="root">

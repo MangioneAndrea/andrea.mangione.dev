@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-background text-foreground">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Andrea's personal website" />
+    <meta
+      name="keywords"
+      content="Andrea, Mangione, Andrea Mangione, Web-developer, FHNW Student, Programmer"
+    />
+    <meta name="author" content="Andrea Mangione" />
+    <title>Andrea Mangione</title>
+  </head>
+  <body>
+    <slot />
+    <style is:global lang="postcss">
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+      @font-face {
+        font-family: GloriaHallelujah;
+        src: url("assets/GloriaHallelujah-Regular.ttf");
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: Inconsolata;
+        src: url("assets/Inconsolata.ttf");
+        font-display: swap;
+      }
+
+      :root {
+        --hand-drawing-font: GloriaHallelujah, Arial, sans-serif;
+        --terminal-font: Inconsolata, Arial, sans-serif;
+        --max-width: 100rem;
+
+        font-size: 120%;
+      }
+
+      html {
+        font-size: 150%;
+      }
+
+      h1,
+      p,
+      h2 {
+        font-family: var(--hand-drawing-font);
+      }
+
+      h2 {
+        margin-bottom: 1rem;
+        width: auto;
+      }
+
+      p {
+        font-size: 1.5rem;
+        text-align: justify;
+        margin: 0 1rem;
+      }
+
+      a {
+        color: white;
+      }
+
+      section {
+        max-width: calc(var(--max-width) - 25rem);
+        margin: 8rem auto 2rem auto;
+      }
+
+      h1 {
+        font-size: 4rem;
+        margin-bottom: 0.2rem;
+        -webkit-text-fill-color: transparent;
+      }
+      @media only screen and (max-width: 1366px) {
+        section {
+          margin: 4rem auto 2rem auto;
+        }
+        h1 {
+          font-size: 3rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+
+      @keyframes disappear {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </body>
+</html>

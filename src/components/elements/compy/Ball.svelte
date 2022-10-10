@@ -1,5 +1,5 @@
 <script>
-  import { clamp, sleep } from "../../helpers/CommonFunctions";
+  import { clamp, sleep } from "../../../helpers/CommonFunctions.js";
 
   export let x;
   export let y;

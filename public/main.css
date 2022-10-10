@@ -1,0 +1,23 @@
+@font-face {
+  font-family: GloriaHallelujah;
+  src: url("assets/GloriaHallelujah-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Inconsolata;
+  src: url("assets/Inconsolata.ttf");
+  font-display: swap;
+}
+
+:root {
+ --hand-drawing-font: GloriaHallelujah, Arial, sans-serif;
+  --terminal-font: Inconsolata, Arial, sans-serif;
+  --max-width: 100rem;
+
+  font-size: 120%;
+}
+
+html {
+  font-size: 150%;
+}
