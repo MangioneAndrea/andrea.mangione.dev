@@ -1,7 +1,8 @@
 ---
 import ArduinoSketch from "./ArduinoSketch.svelte";
-import CodeEditor from "../elements/codeEditor/CodeEditor.svelte";
+import CodeEditor from "../elements/codeEditor/CodeEditor.astro"
 import LanguageList from "../elements/containers/LanguageList.astro"
+
 ---
 
 <div class="root">
@@ -23,7 +24,6 @@ import LanguageList from "../elements/containers/LanguageList.astro"
   <div class="example">
     <div class="code">
       <CodeEditor
-        client:only
         code={`// Android example
     
     // Retreive switch from the android application
