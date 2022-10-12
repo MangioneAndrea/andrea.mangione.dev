@@ -56,9 +56,10 @@
 
   const teleport = deferAsync(async () => {
     let random = compyRight;
+    console.log(main.parentElement.parentElement , main)
 
     while (Math.abs(random - compyRight) < 30) {
-      random = Math.random() * 100;
+      random = Math.random() * (main.parentElement.parentElement.clientWidth - main.clientWidth);
     }
 
     compyRight = random;
@@ -158,7 +159,6 @@
     clearBalls();
   }, 50);
 
-  console.log(left)
 </script>
 
 <svelte:window on:mousemove={onMouseMove} on:mousedown={shootBall} />
@@ -173,7 +173,7 @@
   height="150"
   bind:this={main}
   on:mouseup={teleport}
-  style="--compy-right: {compyRight}%;"
+  style="--compy-right: {compyRight}px;"
 >
   <defs>
     <!-- Head-->
