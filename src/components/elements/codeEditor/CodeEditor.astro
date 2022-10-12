@@ -2,7 +2,7 @@
 import Prism from "prismjs";
 import "prismjs/themes/prism.css";
 import "prismjs/themes/prism-okaidia.min.css";
-import "prismjs/components/prism-kotlin.js";
+import "prismjs/components/prism-kotlin.min.js";
 
 const { code, language } = Astro.props;
 
@@ -10,11 +10,9 @@ const { code, language } = Astro.props;
 const prismClasses = `language-${language}`;
 
 const formatted = Prism.highlight(code, Prism.languages[language], language);
-console.log(formatted);
 ---
 
-<pre
-  class={prismClasses}>  <code>
+<pre class={prismClasses}>  <code>
     <Fragment set:html={formatted} />
   </code>
 </pre>

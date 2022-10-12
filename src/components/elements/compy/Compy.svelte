@@ -88,6 +88,7 @@
     right.targetY = 0;
   }, 1000);
 
+  // No, css animations are not enough performant
   new Promise(async () => {
     while (1) {
       await sleep(10);
@@ -156,6 +157,8 @@
 
     clearBalls();
   }, 50);
+
+  console.log(left)
 </script>
 
 <svelte:window on:mousemove={onMouseMove} on:mousedown={shootBall} />

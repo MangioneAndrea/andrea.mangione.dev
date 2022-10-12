@@ -1,4 +1,6 @@
 <script>
+  import { sleep } from "../../../helpers/CommonFunctions";
+
   export let languages;
   export let description;
 
@@ -30,6 +32,8 @@
       defaultExtrusionY: imageCenterY - circleR,
       extrusionX: centerAnchor + (res.x - centerAnchor) * 1.5 - circleR,
       extrusionY: centerAnchor + (res.y - centerAnchor) * 1.5 - circleR,
+      tX: 0,
+      tY: 0,
     };
 
     return res;
@@ -38,6 +42,29 @@
   // Each element needs to know the previous one
   places.forEach((element, index) => {
     places[(index + 1) % languages.length].previous = element;
+  });
+
+
+  // No, css animations are not enough performant
+  new Promise(async () => {
+    let stage = 1000;
+    while (1) {
+      await sleep(10);
+      if (stage) {
+        stage--;
+      } else {
+        stage = 1000;
+      }
+      let step=Math.abs(stage - 500) / 500 // 0 - 1
+      step = step * step * (3 - 2*step); // bezier
+      places.forEach((place) => {
+        place.tX = (place.maxX - place.minX) * step;
+        place.tY = (place.maxY - place.minY) * step;
+        place.mX = (place.previous.maxX - place.previous.minX) * step;
+        place.mY = (place.previous.maxY - place.previous.minY) * step;
+      });
+      places = places;
+    }
   });
 </script>
 
@@ -69,9 +96,7 @@
             r={circleR}
             fill="white"
             class="maskVisible"
-            style="--speed:{speed}; --target-x: {place.maxX -
-              place.minX}px; --target-y: {place.maxY - place.minY}px"
-            bind:this={place.maskVisible}
+            style="transform: translate({place.tX}px, {place.tY}px);"
           />
           <circle
             cx={place.previous.minX}
@@ -81,10 +106,7 @@
             stroke="black"
             stroke-width="5px"
             class="maskInvisible"
-            style="--speed:{speed}; --target-x: {place.previous.maxX -
-              place.previous.minX}px; --target-y: {place.previous.maxY -
-              place.previous.minY}px"
-            bind:this={place.maskHidden}
+            style="transform: translate({place.mX}px, {place.mY}px);"
           />
         </mask>
         <g id={place.key} mask="url(#key{place.key})" bind:this={place.elem}>
@@ -112,9 +134,6 @@
 
 <style>
   @keyframes move {
-    100% {
-      transform: translate(0, 0);
-    }
     50% {
       transform: translate(var(--target-x), var(--target-y));
     }
