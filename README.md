@@ -1,5 +1,4 @@
-My personal website. Built with Asto, Svelte, Firebase and love
-Work in progress!
+My personal website. Built with Astro, Svelte, Firebase and love
 
 [Now Live!](https://andrea.mangione.dev/)
 
