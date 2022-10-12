@@ -1,0 +1,51 @@
+---
+import Compy from "./elements/compy/Compy.svelte";
+---
+
+<section>
+  <div class="flex relative">
+    <h1 class="bg-greenish bg-clip-text mt-12">About me</h1>
+    <div class="flex-1 relative md:!block hidden">
+      <Compy client:idle />
+    </div>
+  </div>
+  <p>
+    I'm a Switzerland-based developer. Currently working at <b>Jacando AG</b>
+    but always open for any kind of project.
+    <br />
+    I love wandering all over the world and I'm also trying to see as many places
+    as possible. I speak 4 languages:
+    <img
+      class="h-6 inline"
+      src={"assets/Flags/it.svg"}
+      alt="italian flag"
+      width="43"
+      height="29"
+    />,
+    <img
+      src={"assets/Flags/gb.svg"}
+      class="h-6 inline"
+      width="43"
+      height="29"
+      alt="uk flag"
+    />
+    and
+    <img
+      class="h-6 inline"
+      src={"assets/Flags/de.svg"}
+      alt="german flag"
+      width="43"
+      height="29"
+    />
+    /
+    <img
+      class="h-6 inline"
+      src={"assets/Flags/ch.svg"}
+      alt="swiss flag"
+      width="29"
+      height="29"
+    />
+    <br /><br />
+    ... Did I already say I love creating animations and interactivity?
+  </p>
+</section>

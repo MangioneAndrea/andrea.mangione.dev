@@ -1,6 +1,6 @@
-<script>
-  import LanguageList from "../../elements/containers/LanguageList.svelte";
-</script>
+---
+import LanguageList from "../elements/containers/LanguageList.astro"
+---
 
 <div class="root">
   <a
@@ -10,7 +10,9 @@
   >
     <h2>Airhockey</h2>
   </a>
-  <LanguageList icons={["assets/Logos/Go.svg", "assets/Logos/Grpc.svg"]} />
+  <LanguageList
+    icons={["assets/Logos/Go.svg", "assets/Logos/Grpc.svg"]}
+  />
   <p>
     Small Project which creates a network replicated game example. Basically a
     multiplayer game :)<br />
@@ -19,8 +21,8 @@
   </p>
   <div class="example">
     <video autoplay loop muted>
-      <source src="assets/Images/airhockey.webm" type="video/webm">
-        Your browser does not support the video tag.
+      <source src="assets/Images/airhockey.webm" type="video/webm" />
+      Your browser does not support the video tag.
     </video>
   </div>
 </div>
@@ -35,7 +37,6 @@
       margin: 1rem;
     }
   }
-
 
   div.example {
     display: flex;
