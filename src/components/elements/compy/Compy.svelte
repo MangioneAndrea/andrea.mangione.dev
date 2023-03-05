@@ -8,6 +8,7 @@
     deferAsync,
     sleep,
     defer,
+    oneRandomOutOf,
   } from "../../../helpers/CommonFunctions.js";
   import Ball from "./Ball.svelte";
 
@@ -16,6 +17,7 @@
   let rightHand;
   let rightArm, leftArm;
   let body, main;
+  let lastKnownMouseX, lastKnownMouseY;
 
   let balls = new Set();
 
@@ -56,7 +58,6 @@
 
   const teleport = deferAsync(async () => {
     let random = compyRight;
-    console.log(main.parentElement.parentElement , main)
 
     while (Math.abs(random - compyRight) < 30) {
       random = Math.random() * (main.parentElement.parentElement.clientWidth - main.clientWidth);
@@ -134,17 +135,51 @@
     teleport();
   });
 
+  let abortMouseStalker;
   const onMouseMove = (evt) => {
+    abortMouseStalker?.();
     if (!leftEye || !rightEye) return;
+    lastKnownMouseX = evt.clientX;
+    lastKnownMouseY = evt.clientY;
     moveEye(evt.clientX, evt.clientY, leftEye, leftPupil, left);
     moveEye(evt.clientX, evt.clientY, rightEye, rightPupil, right);
     resetEyes();
+    abortMouseStalker = mouseStalker();
   };
 
   const clearBalls = debounce(() => {
     balls.clear();
     balls = balls;
   }, 2000);
+
+
+// Trickery with the heap, args might change, since it's async, so destructuring is a bad idea
+  const mouseStalker = debounce(async (args) => {
+    switch(oneRandomOutOf("cursor","left-right")){
+    	case "cursor":{
+		moveEye(lastKnownMouseX, lastKnownMouseY, leftEye, leftPupil, left);
+		moveEye(lastKnownMouseX, lastKnownMouseY, rightEye, rightPupil, right);
+		break;
+	}
+	case "left-right":{
+		moveEye(0, Infinity, leftEye, leftPupil, left);
+		moveEye(0, Infinity, rightEye, rightPupil, right);
+		await sleep(1000);
+		if(args.shouldAbort) return;
+		moveEye(Infinity, Infinity, leftEye, leftPupil, left);
+		moveEye(Infinity, Infinity, rightEye, rightPupil, right);
+		await sleep(1000);
+		if(args.shouldAbort) return;
+		moveEye(0, Infinity, leftEye, leftPupil, left);
+		moveEye(0, Infinity, rightEye, rightPupil, right);
+		break;
+	}
+    }
+    if(args.shouldAbort) return;
+    resetEyes();
+    if(args.shouldAbort) return;
+    abortMouseStalker = mouseStalker();
+  }, 4000);
 
   const shootBall = defer((evt) => {
     const ball = {

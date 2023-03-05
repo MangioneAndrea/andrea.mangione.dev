@@ -12,7 +12,7 @@
   const imageSize = ((circleR * 2) / svgSize) * 100 + "%";
   const rotation = 0.2;
 
-  const places = languages?.map((place, index) => {
+  let places = languages?.map((place, index) => {
     const proportion = (index * Math.PI * 2) / languages.length;
     const rotationProLanguage = rotation; // languages.length
     let res = {

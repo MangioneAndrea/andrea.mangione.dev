@@ -21,12 +21,14 @@ export function clamp(n = 0, min = -Infinity, max = Infinity) {
  */
 export function debounce(callback, delay) {
   var timeout;
-  return (...prop) => {
+  return (...props) => {
+    const args = {props, shouldAbort: false};
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       timeout = null;
-      callback(...prop);
+      callback(args);
     }, delay);
+    return ()=>args.shouldAbort=true; ;
   };
 }
 
@@ -77,6 +79,6 @@ export function getIdealCurve({ p1x, p1y, p2x, p2y, minCurve = 0 }) {
   return `M${p1x} ${p1y} Q${c1x} ${c1y} ${p2x} ${p2y}`;
 }
 
-export function oneRandomOutOf(arr = []) {
+export function oneRandomOutOf(...arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
