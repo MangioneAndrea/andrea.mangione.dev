@@ -130,6 +130,7 @@
     target.targetX = Math.round(clamp(_x - centerX, -xBound, xBound));
     target.targetY = Math.round(clamp(_y - centerY + pHeight / 2, 0, yBound));
   };
+
   onMount(() => {
     adaptArm();
     teleport();
@@ -141,6 +142,7 @@
     if (!leftEye || !rightEye) return;
     lastKnownMouseX = evt.clientX;
     lastKnownMouseY = evt.clientY;
+
     moveEye(evt.clientX, evt.clientY, leftEye, leftPupil, left);
     moveEye(evt.clientX, evt.clientY, rightEye, rightPupil, right);
     resetEyes();
@@ -280,28 +282,28 @@
     background-color: transparent;
     transition: all ease-in-out 0.2s;
   }
-  svg .face {
+  .face {
     fill: #9fbc4d;
   }
-  svg .hand {
+  .hand {
     fill: #9fbc4d;
   }
-  svg .hair {
+  .hair {
     transform-box: fill-box;
     transform-origin: center;
     transform: rotate(45deg);
   }
-  svg .eye {
+  .eye {
     width: 25px;
     height: 27px;
     fill: #ffffff;
   }
-  svg .pupil {
+  .pupil {
     width: 9px;
     height: 16px;
     fill: #000000;
   }
-  svg .skin {
+  .skin {
     fill: #383c2c;
   }
 </style>
