@@ -19,6 +19,7 @@
   let body, main;
   let lastKnownMouseX, lastKnownMouseY;
 
+
   let balls = new Set();
 
   let compyRight = 0;
@@ -112,11 +113,13 @@
   });
 
   const moveEye = (_x, _y, eye, pup, target) => {
+	  window.eye = eye
     const eyeX = eye.getBoundingClientRect().x;
     const eyeY = eye.getBoundingClientRect().y;
 
     const eyeW = eye.getBoundingClientRect().width;
     const eyeH = eye.getBoundingClientRect().height;
+;
 
     const pWidth = pup.getBoundingClientRect().width;
     const pHeight = pup.getBoundingClientRect().height;
@@ -136,8 +139,10 @@
     teleport();
   });
 
+
   let abortMouseStalker;
   const onMouseMove = (evt) => {
+	  console.log(leftEye)
     abortMouseStalker?.();
     if (!leftEye || !rightEye) return;
     lastKnownMouseX = evt.clientX;

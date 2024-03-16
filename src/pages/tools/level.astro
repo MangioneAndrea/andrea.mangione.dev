@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Bubble from '../../components/gyro/bubble.svelte'
+---
+
+<Layout>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[100vmin] w-[100vmin] bg-gray-800"
+  >
+    <div
+      id="outerCircle"
+      class="aspect-square absolute inset-0 flex items-center justify-center p-8"
+    >
+      <div
+        class="h-full aspect-square rounded-full border-4 border-gray-600 flex items-center justify-center"
+      >
+        <div
+          class="h-[66%] aspect-square rounded-full border-4 border-gray-600 flex items-center justify-center"
+        >
+          <div
+            class="h-[50%] aspect-square rounded-full border-4 border-gray-600 flex items-center justify-center"
+          >
+            <div
+              id="dot"
+              class="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-gray-600"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <Bubble client:idle/>
+    <div class="absolute flex p-3 w-full h-full">
+      <div class="h-[90%] my-auto w-2 rounded bg-gray-400">
+        <div
+          class="absolute -translate-y-2 top-[50%] h-4 w-2 rounded bg-gray-600"
+        >
+        </div>
+      </div>
+      <div class="h-2 mx-auto w-[90%] rounded bg-gray-400">
+        <div
+          class="absolute -translate-x-2 left-[50%] w-4 h-2 rounded bg-gray-600"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
