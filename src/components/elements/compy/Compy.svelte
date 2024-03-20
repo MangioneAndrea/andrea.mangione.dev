@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte'
 
   import {
     debounce,
@@ -9,184 +9,179 @@
     sleep,
     defer,
     oneRandomOutOf,
-  } from "../../../helpers/CommonFunctions.js";
-  import Ball from "./Ball.svelte";
+  } from '../../../helpers/CommonFunctions.js'
+  import Ball from './Ball.svelte'
 
-  let leftPupil, rightPupil;
-  let leftEye, rightEye;
-  let rightHand;
-  let rightArm, leftArm;
-  let body, main;
-  let lastKnownMouseX, lastKnownMouseY;
+  let leftPupil, rightPupil
+  let leftEye, rightEye
+  let rightHand
+  let rightArm, leftArm
+  let body, main
+  let lastKnownMouseX, lastKnownMouseY
 
+  let balls = new Set()
 
-  let balls = new Set();
-
-  let compyRight = 0;
+  let compyRight = 0
   const adaptArm = () => {
     rightArm.setAttribute(
-      "d",
+      'd',
       getIdealCurve({
         p1x:
-          parseFloat(body.getAttribute("x")) +
+          parseFloat(body.getAttribute('x')) +
           body.getBoundingClientRect().width,
         p1y:
-          parseFloat(body.getAttribute("y")) +
+          parseFloat(body.getAttribute('y')) +
           body.getBoundingClientRect().height / 3,
         p2x:
-          parseFloat(rightHand.getAttribute("x")) +
+          parseFloat(rightHand.getAttribute('x')) +
           rightHand.getBoundingClientRect().width / 2,
         p2y:
-          parseFloat(rightHand.getAttribute("y")) +
+          parseFloat(rightHand.getAttribute('y')) +
           rightHand.getBoundingClientRect().height,
       })
-    );
+    )
     leftArm.setAttribute(
-      "d",
+      'd',
       getIdealCurve({
-        p1x: parseFloat(body.getAttribute("x")),
+        p1x: parseFloat(body.getAttribute('x')),
         p1y:
-          parseFloat(body.getAttribute("y")) +
+          parseFloat(body.getAttribute('y')) +
           body.getBoundingClientRect().height / 3,
-        p2x: parseFloat(body.getAttribute("x")),
+        p2x: parseFloat(body.getAttribute('x')),
         p2y:
-          parseFloat(body.getAttribute("y")) +
+          parseFloat(body.getAttribute('y')) +
           body.getBoundingClientRect().height / 1.3,
         minCurve: -50,
       })
-    );
-  };
+    )
+  }
 
   const teleport = deferAsync(async () => {
-    let random = compyRight;
+    let random = compyRight
 
     while (Math.abs(random - compyRight) < 30) {
-      random = Math.random() * (main.parentElement.parentElement.clientWidth - main.clientWidth);
+      random =
+        Math.random() *
+        (main.parentElement.parentElement.clientWidth - main.clientWidth)
     }
 
-    compyRight = random;
-  });
+    compyRight = random
+  })
 
   const left = {
     targetX: 0,
     currentX: 0,
     targetY: 0,
     currentY: 0,
-  };
+  }
 
   const right = {
     targetX: 0,
     currentX: 0,
     targetY: 0,
     currentY: 0,
-  };
+  }
 
-  let pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`;
-  let pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`;
+  let pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`
+  let pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`
 
   const resetEyes = debounce(() => {
-    left.targetX = 0;
-    left.targetY = 0;
-    right.targetX = 0;
-    right.targetY = 0;
-  }, 1000);
+    left.targetX = 0
+    left.targetY = 0
+    right.targetX = 0
+    right.targetY = 0
+  }, 1000)
 
   // No, css animations are not enough performant
   new Promise(async () => {
     while (1) {
-      await sleep(10);
+      await sleep(10)
       if (left.currentX !== left.targetX) {
-        left.currentX += clamp(left.targetX - left.currentX, -1, 1);
+        left.currentX += clamp(left.targetX - left.currentX, -1, 1)
       }
       if (left.currentY !== left.targetY) {
-        left.currentY += clamp(left.targetY - left.currentY, -1, 1);
+        left.currentY += clamp(left.targetY - left.currentY, -1, 1)
       }
       if (right.currentX !== right.targetX) {
-        right.currentX += clamp(right.targetX - right.currentX, -1, 1);
+        right.currentX += clamp(right.targetX - right.currentX, -1, 1)
       }
       if (right.currentY !== right.targetY) {
-        right.currentY += clamp(right.targetY - right.currentY, -1, 1);
+        right.currentY += clamp(right.targetY - right.currentY, -1, 1)
       }
-      pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`;
-      pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`;
+      pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`
+      pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`
     }
-  });
+  })
 
   const moveEye = (_x, _y, eye, pup, target) => {
-	  window.eye = eye
-    const eyeX = eye.getBoundingClientRect().x;
-    const eyeY = eye.getBoundingClientRect().y;
+    const eyeX = eye.getBoundingClientRect().x
+    const eyeY = eye.getBoundingClientRect().y
 
-    const eyeW = eye.getBoundingClientRect().width;
-    const eyeH = eye.getBoundingClientRect().height;
-;
+    const eyeW = eye.getBoundingClientRect().width
+    const eyeH = eye.getBoundingClientRect().height
+    const pWidth = pup.getBoundingClientRect().width
+    const pHeight = pup.getBoundingClientRect().height
 
-    const pWidth = pup.getBoundingClientRect().width;
-    const pHeight = pup.getBoundingClientRect().height;
+    const centerX = eyeW / 2 + eyeX
+    const centerY = eyeH / 2 + eyeY
 
-    const centerX = eyeW / 2 + eyeX;
-    const centerY = eyeH / 2 + eyeY;
+    const xBound = (eyeW - pWidth) / 2
+    const yBound = eyeH - pHeight
 
-    const xBound = (eyeW - pWidth) / 2;
-    const yBound = eyeH - pHeight;
-
-    target.targetX = Math.round(clamp(_x - centerX, -xBound, xBound));
-    target.targetY = Math.round(clamp(_y - centerY + pHeight / 2, 0, yBound));
-  };
+    target.targetX = Math.round(clamp(_x - centerX, -xBound, xBound))
+    target.targetY = Math.round(clamp(_y - centerY + pHeight / 2, 0, yBound))
+  }
 
   onMount(() => {
-    adaptArm();
-    teleport();
-  });
+    adaptArm()
+    teleport()
+  })
 
-
-  let abortMouseStalker;
+  let abortMouseStalker
   const onMouseMove = (evt) => {
-	  console.log(leftEye)
-    abortMouseStalker?.();
-    if (!leftEye || !rightEye) return;
-    lastKnownMouseX = evt.clientX;
-    lastKnownMouseY = evt.clientY;
+    abortMouseStalker?.()
+    if (!leftEye || !rightEye) return
+    lastKnownMouseX = evt.clientX
+    lastKnownMouseY = evt.clientY
 
-    moveEye(evt.clientX, evt.clientY, leftEye, leftPupil, left);
-    moveEye(evt.clientX, evt.clientY, rightEye, rightPupil, right);
-    resetEyes();
-    abortMouseStalker = mouseStalker();
-  };
+    moveEye(evt.clientX, evt.clientY, leftEye, leftPupil, left)
+    moveEye(evt.clientX, evt.clientY, rightEye, rightPupil, right)
+    resetEyes()
+    abortMouseStalker = mouseStalker()
+  }
 
   const clearBalls = debounce(() => {
-    balls.clear();
-    balls = balls;
-  }, 2000);
+    balls.clear()
+    balls = balls
+  }, 2000)
 
-
-// Trickery with the heap, args might change, since it's async, so destructuring is a bad idea
+  // Trickery with the heap, args might change, since it's async, so destructuring is a bad idea
   const mouseStalker = debounce(async (args) => {
-    switch(oneRandomOutOf("cursor","left-right")){
-    	case "cursor":{
-		moveEye(lastKnownMouseX, lastKnownMouseY, leftEye, leftPupil, left);
-		moveEye(lastKnownMouseX, lastKnownMouseY, rightEye, rightPupil, right);
-		break;
-	}
-	case "left-right":{
-		moveEye(0, Infinity, leftEye, leftPupil, left);
-		moveEye(0, Infinity, rightEye, rightPupil, right);
-		await sleep(1000);
-		if(args.shouldAbort) return;
-		moveEye(Infinity, Infinity, leftEye, leftPupil, left);
-		moveEye(Infinity, Infinity, rightEye, rightPupil, right);
-		await sleep(1000);
-		if(args.shouldAbort) return;
-		moveEye(0, Infinity, leftEye, leftPupil, left);
-		moveEye(0, Infinity, rightEye, rightPupil, right);
-		break;
-	}
+    switch (oneRandomOutOf('cursor', 'left-right')) {
+      case 'cursor': {
+        moveEye(lastKnownMouseX, lastKnownMouseY, leftEye, leftPupil, left)
+        moveEye(lastKnownMouseX, lastKnownMouseY, rightEye, rightPupil, right)
+        break
+      }
+      case 'left-right': {
+        moveEye(0, Infinity, leftEye, leftPupil, left)
+        moveEye(0, Infinity, rightEye, rightPupil, right)
+        await sleep(1000)
+        if (args.shouldAbort) return
+        moveEye(Infinity, Infinity, leftEye, leftPupil, left)
+        moveEye(Infinity, Infinity, rightEye, rightPupil, right)
+        await sleep(1000)
+        if (args.shouldAbort) return
+        moveEye(0, Infinity, leftEye, leftPupil, left)
+        moveEye(0, Infinity, rightEye, rightPupil, right)
+        break
+      }
     }
-    if(args.shouldAbort) return;
-    resetEyes();
-    if(args.shouldAbort) return;
-    abortMouseStalker = mouseStalker();
-  }, 4000);
+    if (args.shouldAbort) return
+    resetEyes()
+    if (args.shouldAbort) return
+    abortMouseStalker = mouseStalker()
+  }, 4000)
 
   const shootBall = defer((evt) => {
     const ball = {
@@ -194,13 +189,12 @@
       y: rightHand.getBoundingClientRect().y,
       targetX: evt.clientX,
       targetY: evt.clientY,
-    };
-    balls.add(ball);
-    balls = balls;
+    }
+    balls.add(ball)
+    balls = balls
 
-    clearBalls();
-  }, 50);
-
+    clearBalls()
+  }, 50)
 </script>
 
 <svelte:window on:mousemove={onMouseMove} on:mousedown={shootBall} />
@@ -217,60 +211,41 @@
   on:mouseup={teleport}
   style="--compy-right: {compyRight}px;"
 >
-  <defs>
-    <!-- Head-->
-    <g id="head">
-      <!-- Head contour -->
-      <rect width="103" height="65" x="0" y="24" class="skin" rx="7" />
-      <!-- Face -->
-      <rect width="88" height="50" x="8" y="32" class="face" rx="5" />
-      <!-- Left eye -->
-      <g style={pupilLeft}>
-        <rect x="17" y="43" class="eye" bind:this={leftEye} rx="5" />
-        <!-- Left pupil -->
-        <rect x="25" y="43" class="pupil" bind:this={leftPupil} />
-      </g>
-      <!-- Right eye -->
-      <g style={pupilRight}>
-        <rect x="59" y="43" class="eye" bind:this={rightEye} rx="5" />
-        <!-- Right pupil -->
-        <rect x="67" y="43" class="pupil" bind:this={rightPupil} />
-      </g>
-      <!-- 1 Hair -->
-      <g>
-        <rect width="10" height="30" x="30" y="2" class="skin hair" />
-        <rect width="10" height="30" x="50" y="2" class="skin hair" />
-        <rect width="10" height="30" x="70" y="2" class="skin hair" />
-      </g>
+  <g id="head">
+    <!-- Head contour -->
+    <rect width="103" height="65" x="0" y="24" class="skin" rx="7" />
+    <!-- Face -->
+    <rect width="88" height="50" x="8" y="32" class="face" rx="5" />
+    <!-- Left eye -->
+    <g style={pupilLeft}>
+      <rect x="17" y="43" class="eye" bind:this={leftEye} rx="5" />
+      <!-- Left pupil -->
+      <rect x="25" y="43" class="pupil" bind:this={leftPupil} />
     </g>
-    <g id="armOrigin" />
-    <!-- Hand -->
-    <g id="hand">
-      <rect x="3" width="5" height="15" rx="5" />
-      <rect x="3" width="5" height="15" rx="5" />
-      <rect x="22" width="5" height="15" rx="5" />
-      <polygon points="0,13 30,13 20,28 10,28" class="hand" />
+    <!-- Right eye -->
+    <g style={pupilRight}>
+      <rect x="59" y="43" class="eye" rx="5" bind:this={rightEye} />
+      <!-- Right pupil -->
+      <rect x="67" y="43" class="pupil" bind:this={rightPupil} />
     </g>
-    <!-- Body -->
-    <g id="body">
-      <rect width="55" height="63" class="skin" />
+    <!-- 1 Hair -->
+    <g>
+      <rect width="10" height="30" x="30" y="2" class="skin hair" />
+      <rect width="10" height="30" x="50" y="2" class="skin hair" />
+      <rect width="10" height="30" x="70" y="2" class="skin hair" />
     </g>
-  </defs>
-  <use x="0" y="0" href="#head" />
-  <use x="25" y="84" href="#body" id="body" bind:this={body} />
-  <path
-    fill="transparent"
-    stroke="black"
-    stroke-width="4"
-    bind:this={rightArm}
-  />
-  <path
-    fill="transparent"
-    stroke="black"
-    stroke-width="4"
-    bind:this={leftArm}
-  />
-  <use x="110" y="37" href="#hand" id="rightHand" bind:this={rightHand} />
+  </g>
+  <!-- Hand -->
+  <g id="hand" transform="translate(110, 37)" bind:this={rightHand}>
+    <rect x="3" width="5" height="15" rx="5" />
+    <rect x="3" width="5" height="15" rx="5" />
+    <rect x="22" width="5" height="15" rx="5" />
+    <polygon points="0,13 30,13 20,28 10,28" class="hand" />
+  </g>
+  <!-- Body -->
+  <g id="body" transform="translate(25, 84)">
+    <rect width="55" height="63" class="skin" />
+  </g>
 </svg>
 
 <style>

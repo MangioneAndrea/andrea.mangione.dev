@@ -1,0 +1,9 @@
+{
+  "plugins": ["prettier-plugin-svelte"],
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "indentSize": 4,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true
+}
