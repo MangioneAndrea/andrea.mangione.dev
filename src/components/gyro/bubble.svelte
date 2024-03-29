@@ -11,8 +11,8 @@
 
     let distance = Math.sqrt(Math.pow(t - 50, 2) + Math.pow(l - 50, 2))
 
-    if (distance > 45) {
-      const ratio = 45 / distance
+    if (distance > 40) {
+      const ratio = 40 / distance
       top = (t - 50) * ratio + 50
       left = (l - 50) * ratio + 50
     } else {
