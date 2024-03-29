@@ -1,14 +1,12 @@
 <script>
   import { onMount } from 'svelte'
-  import { clamp } from '../../helpers/CommonFunctions.js'
 
   let top = 50
   let left = 50
 
   const onRotate = (gyro) => {
-    let t = clamp(50 - gyro.beta, 10, 91)
-    let l = clamp(50 - gyro.gamma, 10, 91)
-
+    let t = 50 - gyro.beta
+    let l = 50 - gyro.gamma 
     let distance = Math.sqrt(Math.pow(t - 50, 2) + Math.pow(l - 50, 2))
 
     if (distance > 40) {
