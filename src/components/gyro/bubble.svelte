@@ -10,18 +10,17 @@
     let l = clamp(50 - gyro.gamma, 10, 91)
 
     let distance = Math.sqrt(Math.pow(t - 50, 2) + Math.pow(l - 50, 2))
-    let n = 40
-    while (distance > 45 && n--) {
-      if (t > 50) t--
-      if (l > 50) l--
-      if (t < 50) t++
-      if (l < 50) l++
-      distance = Math.sqrt(Math.pow(t - 50, 2) + Math.pow(l - 50, 2))
-    }
 
-    top = t
-    left = l
+    if (distance > 45) {
+      const ratio = 45 / distance
+      top = (t - 50) * ratio + 50
+      left = (l - 50) * ratio + 50
+    } else {
+      top = t
+      left = l
+    }
   }
+
   onMount(async () => {
     addEventListener('deviceorientation', onRotate)
   })
