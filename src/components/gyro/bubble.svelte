@@ -40,14 +40,9 @@
   style={`top: ${top}%; left: ${left}%`}
   class={'absolute h-8 w-8 -translate-y-4 -translate-x-4 bg-lime-500 rounded-full w-4'}
 ></div>
-<div
-  id="bubble2"
-  style={`top: ${t}%; left: ${l}%`}
-  class={'absolute h-8 w-8 -translate-y-4 -translate-x-4 bg-blue-500 rounded-full w-4'}
-></div>
 <div class="absolute flex p-5 w-full h-full">
   <div class="h-[90%] my-auto w-2 rounded bg-gray-400">
-    <div class="w-full pb-4 -translate-x-[1.125rem] items-center h-full flex">
+    <div class="w-full pb-4 -translate-x-6 items-center h-full flex">
       <div class="text-center h-fit -rotate-90">
         {x}°
       </div>
