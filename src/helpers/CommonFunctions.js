@@ -2,6 +2,10 @@ export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
+export function decimalPlaces(num, places) {
+  return Math.trunc(num * 10 ** places) / 10 ** places
+}
+
 /**
  * Assert a value to be within 2 other
  * @param {number} n Value to clamp
