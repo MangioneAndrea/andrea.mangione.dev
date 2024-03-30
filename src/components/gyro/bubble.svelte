@@ -9,22 +9,14 @@
   let t = 50
   let l = 50
 
-  const onRotate = (gyro) => {
-    x = decimalPlaces(gyro.beta, 2)
-    y = decimalPlaces(gyro.gamma, 2)
-    t = 50 - gyro.beta
-    l = 50 - gyro.gamma
-    let distance = Math.sqrt(Math.pow(t - 50, 2) + Math.pow(l - 50, 2))
+  const onRotate = ({ gamma, beta }) => {
+    x = decimalPlaces(gamma, 2)
+    y = decimalPlaces(beta, 2)
+    gamma = (gamma / 180) * Math.PI
+    beta = (beta / 180) * Math.PI
 
-    if (distance > 40) {
-      const ratio = 40 / distance
-
-      top = (t - 50) * ratio + 50
-      left = (l - 50) * ratio + 50
-    } else {
-      top = t
-      left = l
-    }
+    left = 50 - Math.sin(gamma) * Math.cos(beta) * 40
+    top = 50 - Math.sin(beta) * 40
   }
 
   onMount(async () => {
@@ -41,10 +33,10 @@
   class={'absolute h-8 w-8 -translate-y-4 -translate-x-4 bg-lime-500 rounded-full w-4'}
 ></div>
 <div class="absolute flex p-5 w-full h-full">
-  <div class="h-[90%] my-auto w-2 rounded bg-gray-400">
-    <div class="w-full pb-4 -translate-x-6 items-center h-full flex">
-      <div class="text-center h-fit -rotate-90">
-        {x}°
+  <div class="h-[90%] my-auto w-2 rounded bg-gray-400 flex items-center">
+    <div>
+      <div class="-translate-x-2 origin-left -rotate-90">
+        {-y}°
       </div>
     </div>
     <div
@@ -58,7 +50,7 @@
       class={`absolute -translate-x-2 w-4 h-2 rounded bg-gray-600`}
     ></div>
     <div class="w-full text-center -translate-y-6">
-      {y}°
+      {-x}°
     </div>
   </div>
 </div>
