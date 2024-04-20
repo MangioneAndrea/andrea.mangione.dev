@@ -4,8 +4,6 @@
   export let languages;
   export let description;
 
-  const speed = `${7 + Math.random() * 3}s`;
-
   let circleR = window.innerWidth > 1000 ? 100 : 75;
   const svgSize = circleR * 3;
   const centerAnchor = svgSize / 2;

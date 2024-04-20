@@ -16,41 +16,41 @@
   let leftEye, rightEye
   let rightHand
   let rightArm, leftArm
-  let body, main
+  let body, svg
   let lastKnownMouseX, lastKnownMouseY
 
   let balls = new Set()
 
   let compyRight = 0
+
   const adaptArm = () => {
+    const bodyX = Number(body.getAttribute('x'))
+    const bodyY = Number(body.getAttribute('y'))
+    const bodyWidth = body.getBoundingClientRect().width
+    const bodyHeight = body.getBoundingClientRect().height
+
+    const handX = Number(rightHand.getAttribute('x'))
+    const handY = Number(rightHand.getAttribute('y'))
+    const handWidth = rightHand.getBoundingClientRect().width
+    const handHeight = rightHand.getBoundingClientRect().height
+
     rightArm.setAttribute(
       'd',
       getIdealCurve({
-        p1x:
-          parseFloat(body.getAttribute('x')) +
-          body.getBoundingClientRect().width,
-        p1y:
-          parseFloat(body.getAttribute('y')) +
-          body.getBoundingClientRect().height / 3,
-        p2x:
-          parseFloat(rightHand.getAttribute('x')) +
-          rightHand.getBoundingClientRect().width / 2,
-        p2y:
-          parseFloat(rightHand.getAttribute('y')) +
-          rightHand.getBoundingClientRect().height,
+        p1x: bodyX + bodyWidth,
+        p1y: bodyY + bodyHeight / 3,
+        p2x: handX + handWidth / 2,
+        p2y: handY + handHeight,
       })
     )
+
     leftArm.setAttribute(
       'd',
       getIdealCurve({
-        p1x: parseFloat(body.getAttribute('x')),
-        p1y:
-          parseFloat(body.getAttribute('y')) +
-          body.getBoundingClientRect().height / 3,
-        p2x: parseFloat(body.getAttribute('x')),
-        p2y:
-          parseFloat(body.getAttribute('y')) +
-          body.getBoundingClientRect().height / 1.3,
+        p1x: bodyX,
+        p1y: bodyY + bodyHeight / 3,
+        p2x: bodyX,
+        p2y: bodyY + bodyHeight / 1.3,
         minCurve: -50,
       })
     )
@@ -62,7 +62,7 @@
     while (Math.abs(random - compyRight) < 30) {
       random =
         Math.random() *
-        (main.parentElement.parentElement.clientWidth - main.clientWidth)
+        (svg.parentElement.parentElement.clientWidth - svg.clientWidth)
     }
 
     compyRight = random
@@ -93,25 +93,22 @@
   }, 1000)
 
   // No, css animations are not enough performant
-  new Promise(async () => {
-    while (1) {
-      await sleep(10)
-      if (left.currentX !== left.targetX) {
-        left.currentX += clamp(left.targetX - left.currentX, -1, 1)
-      }
-      if (left.currentY !== left.targetY) {
-        left.currentY += clamp(left.targetY - left.currentY, -1, 1)
-      }
-      if (right.currentX !== right.targetX) {
-        right.currentX += clamp(right.targetX - right.currentX, -1, 1)
-      }
-      if (right.currentY !== right.targetY) {
-        right.currentY += clamp(right.targetY - right.currentY, -1, 1)
-      }
-      pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`
-      pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`
+  setInterval(() => {
+    if (left.currentX !== left.targetX) {
+      left.currentX += clamp(left.targetX - left.currentX, -1, 1)
     }
-  })
+    if (left.currentY !== left.targetY) {
+      left.currentY += clamp(left.targetY - left.currentY, -1, 1)
+    }
+    if (right.currentX !== right.targetX) {
+      right.currentX += clamp(right.targetX - right.currentX, -1, 1)
+    }
+    if (right.currentY !== right.targetY) {
+      right.currentY += clamp(right.targetY - right.currentY, -1, 1)
+    }
+    pupilLeft = `--pupil-x: ${left.currentX}px; --pupil-y: ${left.currentY}px;`
+    pupilRight = `--pupil-x: ${right.currentX}px; --pupil-y: ${right.currentY}px;`
+  }, 1000 / 60 /* 60 fps */)
 
   const moveEye = (_x, _y, eye, pup, target) => {
     const eyeX = eye.getBoundingClientRect().x
@@ -207,7 +204,7 @@
   xmlns:xlink="http://www.w3.org/1999/xlink"
   width="150"
   height="150"
-  bind:this={main}
+  bind:this={svg}
   on:mouseup={teleport}
   style="--compy-right: {compyRight}px;"
 >
@@ -235,17 +232,41 @@
       <rect width="10" height="30" x="70" y="2" class="skin hair" />
     </g>
   </g>
-  <!-- Hand -->
-  <g id="hand" transform="translate(110, 37)" bind:this={rightHand}>
+  <!-- Hand, x and y are not supported by G element, but needed for calculations -->
+  <g
+    id="hand"
+    transform="translate(110, 37)"
+    x="110"
+    y="37"
+    bind:this={rightHand}
+  >
     <rect x="3" width="5" height="15" rx="5" />
     <rect x="3" width="5" height="15" rx="5" />
     <rect x="22" width="5" height="15" rx="5" />
     <polygon points="0,13 30,13 20,28 10,28" class="hand" />
   </g>
   <!-- Body -->
-  <g id="body" transform="translate(25, 84)">
-    <rect width="55" height="63" class="skin" />
-  </g>
+  <rect
+    id="body"
+    bind:this={body}
+    x="25"
+    y="84"
+    width="55"
+    height="63"
+    class="skin"
+  />
+  <path
+    fill="transparent"
+    stroke="black"
+    stroke-width="6"
+    bind:this={rightArm}
+  />
+  <path
+    fill="transparent"
+    stroke="black"
+    stroke-width="6"
+    bind:this={leftArm}
+  />
 </svg>
 
 <style>

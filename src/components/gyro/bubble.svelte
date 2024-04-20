@@ -6,8 +6,6 @@
   let y = 0
   let top = 50
   let left = 50
-  let t = 50
-  let l = 50
 
   const onRotate = ({ gamma, beta }) => {
     x = decimalPlaces(gamma, 2)
@@ -22,9 +20,6 @@
   onMount(async () => {
     addEventListener('deviceorientation', onRotate)
   })
-  /*
-
-  */
 </script>
 
 <div
