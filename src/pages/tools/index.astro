@@ -2,9 +2,10 @@
 import Layout from '../../layouts/Layout.astro'
 ---
 
+<link rel="manifest" href="/tools/manifest.json" />
+<meta name="theme-color" content="#1a1a1a"/>
 <Layout>
 <div class="min-h-screen flex flex-col">
-  <div class="grid w-full max-w-4xl rounded-2xl border border-gray-200 bg-white shadow-lg overflow-hidden divide-y divide-gray-200 dark:border-gray-800 dark:bg-gray-950 dark:divide-gray-800">
     <div class="grid w-full grid-cols-3 items-center justify-center gap-4 p-4">
       <a
         class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-100/50 focus-visible:outline-none focus-visible:ring-1 dark:hover:bg-gray-800/50 dark:focus-visible:ring-gray-950"
@@ -31,5 +32,4 @@ import Layout from '../../layouts/Layout.astro'
       </a>
     </div>
   </div>
-</div>
 </Layout>
