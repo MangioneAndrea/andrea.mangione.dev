@@ -17,20 +17,17 @@
     navigator.geolocation.getCurrentPosition(update)
 
     navigator.geolocation.watchPosition(update)
-
-    console.log('mount')
   })
 
-  function haversine(lat1, lon1, lat2, lon2) {
+  function haversine(lat2, lon2) {
     const R = 6371
-    const dLat = toRadians(lat2 - lat1)
-    const dLon = toRadians(lon2 - lon1)
+    const dLat = toRadians(lat2 - lat)
+    const dLon = toRadians(lon2 - lng)
     const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRadians(lat1)) *
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRadians(lat)) *
         Math.cos(toRadians(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2)
+        Math.sin(dLon / 2) ** 2
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     return R * c
   }
@@ -44,7 +41,7 @@
     deltaLat = ((lat - pos.coords.latitude) * 1000) / (pos.timestamp - time)
     deltaLng = ((lng - pos.coords.longitude) * 1000) / (pos.timestamp - time)
 
-    distance = haversine(lat, lng, pos.coords.latitude, pos.coords.longitude)
+    distance = haversine(pos.coords.latitude, pos.coords.longitude)
 
     speedKmH = distance / ((pos.timestamp - time) / (60 * 60 * 1000))
     speedMS = distance / (pos.timestamp - time)
