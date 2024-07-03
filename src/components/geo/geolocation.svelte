@@ -44,7 +44,7 @@
     distance = haversine(pos.coords.latitude, pos.coords.longitude)
 
     speedKmH = distance / ((pos.timestamp - time) / (60 * 60 * 1000))
-    speedMS = distance / (pos.timestamp - time)
+    speedMS = speedKmH / 3.6
 
     lat = pos.coords.latitude
     lng = pos.coords.longitude
