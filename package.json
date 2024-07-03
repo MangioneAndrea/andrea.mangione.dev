@@ -11,16 +11,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/svelte": "^1.0.1",
-    "@astrojs/tailwind": "^2.0.2",
+    "@astrojs/svelte": "^5.6.0",
+    "@astrojs/tailwind": "^5.1.0",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
-    "astro": "^1.4.7",
+    "astro": "^4.11.3",
     "prismjs": "^1.29.0",
-    "svelte": "^3.46.4",
+    "svelte": "4.2.18",
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.2",
+    "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-svelte": "^3.2.2",
     "svelte-preprocess": "^4.10.7"
   }
