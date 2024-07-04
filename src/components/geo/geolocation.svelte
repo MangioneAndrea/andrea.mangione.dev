@@ -8,8 +8,6 @@
 
   let distance = 0
 
-  let speedMS = 0
-
   let deltaLat = 0
   let deltaLng = 0
 
@@ -65,12 +63,6 @@
 </script>
 
 <div>
-  <span>Latitude: {lat}</span>
-  <br />
-  <span>Longitude: {lng}</span>
-  <br />
-  <span>Speed: {Math.round(speedKmH)}Km/h or {Math.round(speedMS)}M/s</span>
-
   <svg
     width="350"
     height="270"
@@ -151,5 +143,12 @@
   #indicator {
     transform-origin: 175px 175px;
     transition: all ease-in 100ms;
+  }
+
+  div {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
   }
 </style>
