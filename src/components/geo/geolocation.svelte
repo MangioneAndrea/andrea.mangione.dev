@@ -118,13 +118,16 @@
     <text x="260" y="182">140</text>
     <text x="246" y="235">160</text>
     <text x="150" y="210" id="unit">Km/h</text>
-    <text x="50%" y="160" id="speed" text-anchor="middle">{speedKmH}</text>
+    <text x="50%" y="160" id="speed" text-anchor="middle"
+      >{Math.round(speedKmH)}</text
+    >
 
     <line
       x1={175}
       y1={175}
-      x2={pointInCircle(speedKmH)[0]}
-      y2={pointInCircle(speedKmH)[1]}
+      x2={20}
+      y2={175}
+      style={`transform: rotate(${(speedKmH / 240) * 360 - 30}deg)`}
       stroke="red"
       stroke-width="5"
       id="indicator"
@@ -150,6 +153,7 @@
   }
 
   #indicator {
-    transition: all ease-in 500ms;
+    transform-origin: 175px 175px;
+    transition: all ease-in 100ms;
   }
 </style>
