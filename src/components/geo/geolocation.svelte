@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte'
+  import { RingedBuffer } from '../../helpers/CommonFunctions'
 
   let lat = 0
   let lng = 0
@@ -7,11 +8,13 @@
 
   let distance = 0
 
-  let speedKmH = 0
   let speedMS = 0
 
   let deltaLat = 0
   let deltaLng = 0
+
+  let speedRb = new RingedBuffer(3)
+  let speedKmH = 0
 
   onMount(async () => {
     navigator.geolocation.getCurrentPosition(update)
@@ -43,8 +46,8 @@
 
     distance = haversine(pos.coords.latitude, pos.coords.longitude)
 
-    speedKmH = distance / ((pos.timestamp - time) / (60 * 60 * 1000))
-    speedMS = speedKmH / 3.6
+    speedRb.push(distance / ((pos.timestamp - time) / (60 * 60 * 1000)))
+    speedKmH = speedRb.average
 
     lat = pos.coords.latitude
     lng = pos.coords.longitude
@@ -59,13 +62,6 @@
         r * Math.cos((((i + 10) / 60) * 360) / (180 / Math.PI)) + 175,
       ])
   )
-
-  function pointInCircle(speed) {
-    return [
-      150 * Math.sin(((-speed / 240) * 360 - 60) / (180 / Math.PI)) + 175,
-      150 * Math.cos(((-speed / 240) * 360 - 60) / (180 / Math.PI)) + 175,
-    ]
-  }
 </script>
 
 <div>
@@ -118,9 +114,9 @@
     <text x="260" y="182">140</text>
     <text x="246" y="235">160</text>
     <text x="150" y="210" id="unit">Km/h</text>
-    <text x="50%" y="160" id="speed" text-anchor="middle"
-      >{Math.round(speedKmH)}</text
-    >
+    <text x="50%" y="160" id="speed" text-anchor="middle">
+      {Math.round(speedKmH)}
+    </text>
 
     <line
       x1={175}

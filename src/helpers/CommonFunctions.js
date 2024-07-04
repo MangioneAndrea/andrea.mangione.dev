@@ -85,3 +85,29 @@ export function getIdealCurve({ p1x, p1y, p2x, p2y, minCurve = 0 }) {
 export function oneRandomOutOf(...arr) {
   return arr[Math.floor(Math.random() * arr.length)]
 }
+
+export class RingedBuffer {
+  index = 0
+  size = 0
+  constructor(maxSize) {
+    this.buffer = new Array(maxSize);
+    this.maxSize = maxSize
+  }
+
+  push(num) {
+    if (Number.isNaN(num)) return
+    this.buffer[this.index] = num
+    this.index++
+    if (this.index >= this.maxSize) this.index = 0
+    if (this.size < this.maxSize) this.size++
+  }
+
+  get average() {
+    let sum = 0
+
+    for (let i = 0; i < this.size; i++) {
+      sum += this.buffer[i]
+    }
+    return sum / (this.size || 1)
+  }
+}
