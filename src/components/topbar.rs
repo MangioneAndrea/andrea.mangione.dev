@@ -1,4 +1,9 @@
+use std::sync::mpsc::RecvTimeoutError;
+
 use leptos::prelude::*;
+
+use crate::routes;
+
 
 #[component]
 pub fn image_link(
@@ -43,7 +48,7 @@ pub fn topbar() -> impl IntoView {
                     >
                         <li>
                             <ImageLink
-                                link="/"
+                                link=routes::Routes::Home.path()
                                 text="Home"
                                 image="/assets/icons/home.svg"
                                 with_text=true
@@ -51,7 +56,7 @@ pub fn topbar() -> impl IntoView {
                         </li>
                         <li>
                             <ImageLink
-                                link="/blog"
+                                link=routes::Routes::Blog.path()
                                 text="Blog"
                                 image="/assets/icons/blog.svg"
                                 with_text=true
@@ -89,10 +94,10 @@ pub fn topbar() -> impl IntoView {
             <div class="navbar-center">
                 <label class="lg:hidden">andrea.mangione.dev</label>
                 <div role="tablist" class="tabs tabs-border hidden lg:flex">
-                    <a role="tab" class="tab tab-active">
+                    <a role="tab" class="tab tab-active" href=routes::Routes::Home.path()>
                         Home
                     </a>
-                    <a role="tab" class="tab">
+                    <a role="tab" class="tab" href=routes::Routes::Blog.path()>
                         Posts
                     </a>
                 </div>
