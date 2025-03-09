@@ -4,9 +4,8 @@ mod components;
 mod routes;
 
 use components::topbar::Topbar;
-use leptos_router::components::{Route, Router, Routes};
-use leptos_router::path;
-use routes::{Routes as R, A, B};
+use leptos_router::components::Router;
+use routes::RoutesSlot;
 
 fn main() {
     leptos::mount::mount_to_body(App)
@@ -17,12 +16,7 @@ fn app() -> impl IntoView {
     view! {
         <Router>
             <Topbar />
-
-            <Routes fallback=|| "oo">
-                <Route path=path!("") view=A />
-                <Route path=path!("/blog") view=B />
-            </Routes>
-
+            <RoutesSlot/>
         </Router>
     }
 }

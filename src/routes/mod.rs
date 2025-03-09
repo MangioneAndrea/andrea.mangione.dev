@@ -1,4 +1,15 @@
+use leptos::prelude::Get;
 use leptos::{component, view, IntoView};
+
+mod blog;
+mod home;
+
+use leptos_router::components::{Route, Routes};
+use leptos_router::location::Location;
+use leptos_router::path;
+
+use blog::Blog;
+use home::Home;
 use strum_macros::EnumIter;
 
 #[derive(EnumIter, Debug, PartialEq)]
@@ -8,19 +19,43 @@ pub enum Routes {
 }
 
 impl Routes {
-    pub const fn path(&self) -> &str {
+    pub const fn path(&self) -> &'static str {
         match self {
             Self::Home => "/",
             Self::Blog => "/blog",
         }
     }
+
+    //pub fn view(&self) -> AnyView {
+    //    match self {
+    //        Self::Home => Home().into_any(),
+    //        Self::Blog => Blog().into_any(),
+    //    }
+    //}
+    //
+
+
+    pub fn get_active(location: Location) -> Self {
+        let p = location.pathname.get();
+        match p.as_str() {
+            "/blog" => Self::Blog,
+            _ => Self::Home
+        }
+    }
 }
 
-#[component()]
-pub fn a() -> impl IntoView {
-    view! { "a" }
-}
-#[component()]
-pub fn b() -> impl IntoView {
-    view! { "b" }
+#[component]
+pub fn routes_slot() -> impl IntoView {
+    //let r:Vec<_> = Routes::iter()
+    //    .map(|r|
+    //        view! {<Route path=StaticSegment(r.path()) view=||view! {r.view()} />}
+    //    )
+    //    .collect();
+
+    view! {
+            <Routes fallback=|| "404">
+            <Route path=path!("") view=Home />
+                <Route path=path!("/blog") view=Blog />
+            </Routes>
+    }
 }

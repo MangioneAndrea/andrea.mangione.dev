@@ -1,8 +1,9 @@
-use std::sync::mpsc::RecvTimeoutError;
-
 use leptos::prelude::*;
 
-use crate::routes;
+use crate::routes::Routes;
+
+use leptos_router::hooks::use_location;
+
 
 
 #[component]
@@ -12,6 +13,7 @@ pub fn image_link(
     text: &'static str,
     #[prop(default = false)] with_text: bool,
 ) -> impl IntoView {
+    
     view! {
         <a href=link target="_blank">
             <img class=if with_text { "h-4 w-4" } else { "h-8 w-8" } src=image alt=text />
@@ -22,6 +24,9 @@ pub fn image_link(
 
 #[component]
 pub fn topbar() -> impl IntoView {
+    let location = use_location();
+
+
     view! {
         <div class="navbar bg-base-100 shadow-sm">
             <div class="navbar-start">
@@ -48,7 +53,7 @@ pub fn topbar() -> impl IntoView {
                     >
                         <li>
                             <ImageLink
-                                link=routes::Routes::Home.path()
+                                link=Routes::Home.path()
                                 text="Home"
                                 image="/assets/icons/home.svg"
                                 with_text=true
@@ -56,7 +61,7 @@ pub fn topbar() -> impl IntoView {
                         </li>
                         <li>
                             <ImageLink
-                                link=routes::Routes::Blog.path()
+                                link=Routes::Blog.path()
                                 text="Blog"
                                 image="/assets/icons/blog.svg"
                                 with_text=true
@@ -94,11 +99,11 @@ pub fn topbar() -> impl IntoView {
             <div class="navbar-center">
                 <label class="lg:hidden">andrea.mangione.dev</label>
                 <div role="tablist" class="tabs tabs-border hidden lg:flex">
-                    <a role="tab" class="tab tab-active" href=routes::Routes::Home.path()>
+                    <a role="tab" class="tab " class:tab-active={let location = location.clone(); move ||Routes::get_active(location.clone())==Routes::Home} href=Routes::Home.path()>
                         Home
                     </a>
-                    <a role="tab" class="tab" href=routes::Routes::Blog.path()>
-                        Posts
+                    <a role="tab" class="tab" class:tab-active={let location = location.clone(); ||Routes::get_active(location.clone())==Routes::Blog} href=Routes::Blog.path()>
+                        Blog 
                     </a>
                 </div>
             </div>
