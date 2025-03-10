@@ -99,10 +99,10 @@ pub fn topbar() -> impl IntoView {
             <div class="navbar-center">
                 <label class="lg:hidden">andrea.mangione.dev</label>
                 <div role="tablist" class="tabs tabs-border hidden lg:flex">
-                    <a role="tab" class="tab " class:tab-active={let location = location.clone(); move ||Routes::get_active(location.clone())==Routes::Home} href=Routes::Home.path()>
+                    <a role="tab" class="tab " class:tab-active={||Routes::get_active()==Routes::Home} href=Routes::Home.path()>
                         Home
                     </a>
-                    <a role="tab" class="tab" class:tab-active={let location = location.clone(); ||Routes::get_active(location.clone())==Routes::Blog} href=Routes::Blog.path()>
+                    <a role="tab" class="tab" class:tab-active={||Routes::get_active()==Routes::Blog} href=Routes::Blog.path()>
                         Blog 
                     </a>
                 </div>

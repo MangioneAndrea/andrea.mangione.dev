@@ -5,6 +5,7 @@ mod blog;
 mod home;
 
 use leptos_router::components::{Route, Routes};
+use leptos_router::hooks::use_location;
 use leptos_router::location::Location;
 use leptos_router::path;
 
@@ -35,8 +36,8 @@ impl Routes {
     //
 
 
-    pub fn get_active(location: Location) -> Self {
-        let p = location.pathname.get();
+    pub fn get_active() -> Self {
+        let p = use_location().pathname.get();
         match p.as_str() {
             "/blog" => Self::Blog,
             _ => Self::Home
