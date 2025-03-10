@@ -2,10 +2,6 @@ use leptos::prelude::*;
 
 use crate::routes::Routes;
 
-use leptos_router::hooks::use_location;
-
-
-
 #[component]
 pub fn image_link(
     image: &'static str,
@@ -13,7 +9,6 @@ pub fn image_link(
     text: &'static str,
     #[prop(default = false)] with_text: bool,
 ) -> impl IntoView {
-    
     view! {
         <a href=link target="_blank">
             <img class=if with_text { "h-4 w-4" } else { "h-8 w-8" } src=image alt=text />
@@ -24,9 +19,6 @@ pub fn image_link(
 
 #[component]
 pub fn topbar() -> impl IntoView {
-    let location = use_location();
-
-
     view! {
         <div class="navbar bg-base-100 shadow-sm">
             <div class="navbar-start">
@@ -99,11 +91,21 @@ pub fn topbar() -> impl IntoView {
             <div class="navbar-center">
                 <label class="lg:hidden">andrea.mangione.dev</label>
                 <div role="tablist" class="tabs tabs-border hidden lg:flex">
-                    <a role="tab" class="tab " class:tab-active={||Routes::get_active()==Routes::Home} href=Routes::Home.path()>
+                    <a
+                        role="tab"
+                        class="tab "
+                        class:tab-active=|| Routes::get_active() == Routes::Home
+                        href=Routes::Home.path()
+                    >
                         Home
                     </a>
-                    <a role="tab" class="tab" class:tab-active={||Routes::get_active()==Routes::Blog} href=Routes::Blog.path()>
-                        Blog 
+                    <a
+                        role="tab"
+                        class="tab"
+                        class:tab-active=|| Routes::get_active() == Routes::Blog
+                        href=Routes::Blog.path()
+                    >
+                        Blog
                     </a>
                 </div>
             </div>
