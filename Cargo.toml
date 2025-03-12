@@ -9,6 +9,7 @@ leptos_meta = "0.7.7"
 leptos_router = "0.7.7"
 strum = { version = "0.27.1", features = ["strum_macros"] }
 strum_macros = "0.27.1"
+stylers = "0.3.2"
 
 [package.metadata.leptos]
 # The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name   
