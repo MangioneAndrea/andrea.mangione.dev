@@ -44,21 +44,17 @@ pub fn stack_visualizer() -> impl IntoView {
 
     let sectors = languages.len();
 
-    let radius = if sectors <= 1 { 0. } else { IMAGE_RADIUS };
-
     let centers: Vec<_> = languages
         .iter()
         .enumerate()
         .map(|(i, lan)| {
-            // Calculate the angle for the current sector
             let angle = 2.0 * PI * (i as f64) / (sectors as f64);
 
-            // Calculate the (x, y) position of the image
             let x = IMAGE_RADIUS * angle.cos() + IMAGE_RADIUS * 2.;
             let y = IMAGE_RADIUS * angle.sin() + IMAGE_RADIUS * 2.;
 
-            let ox = x / 2.; // visible confusion...
-            let oy = y / 2.;
+            let ox = x -IMAGE_RADIUS ;
+            let oy = y -IMAGE_RADIUS;
 
             (x, y, ox, oy, lan)
         })
@@ -71,7 +67,7 @@ pub fn stack_visualizer() -> impl IntoView {
                 -moz-transform: rotate(0deg);
                 -webkit-transform: rotate(0deg);
                 -o-transform: rotate(0deg);
-                transform: rotate(-30deg);
+                transform: rotate(-20deg);
             }
 
             50% {
@@ -79,7 +75,7 @@ pub fn stack_visualizer() -> impl IntoView {
                 -moz-transform: rotate(360deg);
                 -webkit-transform: rotate(360deg);
                 -o-transform: rotate(360deg);
-                transform: rotate(30deg);
+                transform: rotate(20deg);
             }
 
             100% {
@@ -92,7 +88,7 @@ pub fn stack_visualizer() -> impl IntoView {
         }
 
         :deep(.rotator) {
-            animation: rotating 2s linear infinite;
+            animation: rotating 7s ease infinite;
         }
     };
 
