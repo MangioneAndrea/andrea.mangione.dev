@@ -11,7 +11,7 @@ pub fn image_link(
 ) -> impl IntoView {
     view! {
         <a href=link target="_blank">
-            <img class=if with_text { "h-4 w-4" } else { "h-8 w-8" } src=image alt=text />
+            <img class=if with_text { "w-4" } else { "w-8" } src=image alt=text />
             {if with_text { text } else { "" }}
         </a>
     }

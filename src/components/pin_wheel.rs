@@ -28,7 +28,7 @@ pub struct Image {
 
 const IMAGE_RADIUS: f64 = 100.;
 #[component]
-pub fn stack_visualizer(images: Vec<Image>) -> impl IntoView {
+pub fn pin_wheel(images: Vec<Image>) -> impl IntoView {
     let sectors = images.len();
 
     let centers: Vec<_> = images
@@ -104,7 +104,12 @@ pub fn stack_visualizer(images: Vec<Image>) -> impl IntoView {
     // Return view with Leptos components
     view! { class=class,
         <style>{style}</style>
-        <svg width=IMAGE_RADIUS * 4. height=IMAGE_RADIUS * 4. class=class>
+        <svg
+            width=IMAGE_RADIUS * 4.
+            height=IMAGE_RADIUS * 4.
+            style=format!("min-width:{}px;  min-height:{}px;", IMAGE_RADIUS * 4., IMAGE_RADIUS * 4.)
+            class=class
+        >
             {v
                 .into_iter()
                 .map(|(src, next)| {

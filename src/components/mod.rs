@@ -1,2 +1,2 @@
 pub mod topbar;
-pub mod stack_visualizer;
+pub mod pin_wheel;
