@@ -21,32 +21,17 @@ struct Location {
 }
 
 #[derive(Debug)]
-struct Image {
-    src: &'static str,
-    key: &'static str,
+pub struct Image {
+    pub src: &'static str,
+    pub key: &'static str,
 }
 
 const IMAGE_RADIUS: f64 = 100.;
 #[component]
-pub fn stack_visualizer() -> impl IntoView {
-    let languages = vec![
-        Image {
-            src: "assets/Logos/Astro.svg",
-            key: "astro",
-        },
-        Image {
-            src: "assets/Logos/Solid.png",
-            key: "solid",
-        },
-        Image {
-            src: "assets/Logos/Svelte.svg",
-            key: "svelte",
-        },
-    ];
+pub fn stack_visualizer(images: Vec<Image>) -> impl IntoView {
+    let sectors = images.len();
 
-    let sectors = languages.len();
-
-    let centers: Vec<_> = languages
+    let centers: Vec<_> = images
         .into_iter()
         .enumerate()
         .map(|(i, image)| {
@@ -156,14 +141,10 @@ pub fn stack_visualizer() -> impl IntoView {
                             mask=format!("url(#{})", src.image.key)
                             transform=format!("translate({},{})", src.mask.x, src.mask.y)
                         >
-
                             <image
                                 href=src.image.src
-                                transform=format!(
-                                    "translate({},{})",
-                                    -src.mask.x + src.center.x,
-                                    -src.mask.y + src.center.y,
-                                )
+                                x=-src.mask.x + src.center.x
+                                y=-src.mask.y + src.center.y
                                 height=IMAGE_RADIUS * 2.
                                 width=IMAGE_RADIUS * 2.
                             />
