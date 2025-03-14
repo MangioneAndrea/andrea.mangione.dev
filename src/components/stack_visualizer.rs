@@ -1,17 +1,11 @@
-use leptos::leptos_dom::logging::console_log;
 use leptos::prelude::ClassAttribute;
 use leptos::prelude::CustomAttribute;
 use leptos::prelude::ElementChild;
 use leptos::{
-    prelude::{set_interval, signal, CollectView, Get, Set, StyleAttribute, Update},
-    svg::Circle,
-    task::spawn_local,
+    prelude::{CollectView, StyleAttribute},
     *,
 };
-use std::{
-    f64::{self, consts::PI},
-    time::Duration,
-};
+use std::f64::{self, consts::PI};
 
 #[derive(Default)]
 struct Point {
@@ -19,76 +13,93 @@ struct Point {
     y: f64,
 }
 
+struct Location {
+    mask: Point,   // The center of the mask
+    pivot: Point,  // Anchor for the animation
+    center: Point, // The center of the image
+    image: Image,
+}
+
 #[derive(Debug)]
-struct Language {
-    image: &'static str,
+struct Image {
+    src: &'static str,
     key: &'static str,
-    color: &'static str,
 }
 
 const IMAGE_RADIUS: f64 = 100.;
 #[component]
 pub fn stack_visualizer() -> impl IntoView {
     let languages = vec![
-        Language {
-            image: "assets/Logos/Astro.svg",
+        Image {
+            src: "assets/Logos/Astro.svg",
             key: "astro",
-            color: "white",
         },
-        Language {
-            image: "assets/Logos/Svelte.svg",
-            key: "svelte",
-            color: "red",
-        },
-        Language {
-            image: "assets/Logos/Solid.png",
+        Image {
+            src: "assets/Logos/Solid.png",
             key: "solid",
-            color: "blue",
+        },
+        Image {
+            src: "assets/Logos/Svelte.svg",
+            key: "svelte",
         },
     ];
 
     let sectors = languages.len();
 
     let centers: Vec<_> = languages
-        .iter()
+        .into_iter()
         .enumerate()
-        .map(|(i, lan)| {
+        .map(|(i, image)| {
             let angle = 2.0 * PI * (i as f64) / (sectors as f64);
 
-            let x = IMAGE_RADIUS * angle.cos() + IMAGE_RADIUS;
-            let y = IMAGE_RADIUS * angle.sin() + IMAGE_RADIUS;
+            let center = Point {
+                x: IMAGE_RADIUS * 0.6 * angle.cos() + IMAGE_RADIUS,
+                y: IMAGE_RADIUS * 0.6 * angle.sin() + IMAGE_RADIUS,
+            };
 
-            let ox = 2. * IMAGE_RADIUS - x;
-            let oy = 2. * IMAGE_RADIUS - y;
+            let mask = Point {
+                x: IMAGE_RADIUS * angle.cos() + IMAGE_RADIUS,
+                y: IMAGE_RADIUS * angle.sin() + IMAGE_RADIUS,
+            };
 
-            (x, y, ox, oy, lan)
+            let pivot = Point {
+                x: 2. * IMAGE_RADIUS - mask.x,
+                y: 2. * IMAGE_RADIUS - mask.y,
+            };
+
+            Location {
+                center,
+                mask,
+                pivot,
+                image,
+            }
         })
         .collect();
 
     let (class, style) = stylers::style_str! {
         @keyframes rotating {
             0% {
-                -ms-transform: rotate(-20deg);
-                -moz-transform: rotate(-20deg);
-                -webkit-transform: rotate(-20deg);
-                -o-transform: rotate(-20deg);
-                transform: rotate(-20deg);
+                -ms-transform: rotate(-10deg);
+                -moz-transform: rotate(-10deg);
+                -webkit-transform: rotate(-10deg);
+                -o-transform: rotate(-10deg);
+                transform: rotate(-10deg);
             }
 
             50% {
-                -ms-transform: rotate(20deg);
-                -moz-transform: rotate(20deg);
-                -webkit-transform: rotate(20deg);
-                -o-transform: rotate(20deg);
-                transform: rotate(20deg);
+                -ms-transform: rotate(10deg);
+                -moz-transform: rotate(10deg);
+                -webkit-transform: rotate(10deg);
+                -o-transform: rotate(10deg);
+                transform: rotate(10deg);
             }
 
             100% {
-                -ms-transform: rotate(-20deg);
-                -moz-transform: rotate(-20deg);
-                -webkit-transform: rotate(-20deg);
-                -o-transform: rotate(-20deg);
-                transform: rotate(-20deg);
+                -ms-transform: rotate(-10deg);
+                -moz-transform: rotate(-10deg);
+                -webkit-transform: rotate(-10deg);
+                -o-transform: rotate(-10deg);
+                transform: rotate(-10deg);
             }
         }
 
@@ -111,59 +122,51 @@ pub fn stack_visualizer() -> impl IntoView {
         <svg width=IMAGE_RADIUS * 4. height=IMAGE_RADIUS * 4. class=class>
             {v
                 .into_iter()
-                .map(|((x, y, ox, oy, lan), (nx, ny, nox, noy, nlan))| {
+                .map(|(src, next)| {
                     view! {
-                        <mask id=lan.key>
+                        <mask id=src.image.key>
                             <circle
                                 class="rotator"
-                                style=format!("transform-origin: {ox}px {oy}px;")
-                                fill="black"
-                                cx=IMAGE_RADIUS
-                                cy=IMAGE_RADIUS
-                                r=IMAGE_RADIUS
-                            />
-                            <circle
-                                class="rotator"
-                                style=format!("transform-origin: {ox}px {oy}px;")
+                                style=format!(
+                                    "transform-origin: {}px {}px;",
+                                    src.pivot.x,
+                                    src.pivot.y,
+                                )
                                 fill="white"
                                 cx=IMAGE_RADIUS
                                 cy=IMAGE_RADIUS
                                 r=IMAGE_RADIUS
-
                                 stroke="black"
-                                stroke-width="5px"
+                                stroke-width="10px"
                             />
                             <circle
                                 class="rotator"
-                                style=format!("transform-origin: {ox}px {oy}px;")
+                                style=format!(
+                                    "transform-origin: {}px {}px;",
+                                    src.pivot.x,
+                                    src.pivot.y,
+                                )
                                 fill="black"
-                                cx=IMAGE_RADIUS - x + nx
-                                cy=IMAGE_RADIUS - y + ny
+                                cx=IMAGE_RADIUS - src.mask.x + next.mask.x
+                                cy=IMAGE_RADIUS - src.mask.y + next.mask.y
                                 r=IMAGE_RADIUS
                             />
                         </mask>
                         <g
-                            transform=format!("translate({},{})", x, y)
-                            mask=format!("url(#{})", lan.key)
+                            mask=format!("url(#{})", src.image.key)
+                            transform=format!("translate({},{})", src.mask.x, src.mask.y)
                         >
 
                             <image
-                                href=lan.image
+                                href=src.image.src
+                                transform=format!(
+                                    "translate({},{})",
+                                    -src.mask.x + src.center.x,
+                                    -src.mask.y + src.center.y,
+                                )
                                 height=IMAGE_RADIUS * 2.
                                 width=IMAGE_RADIUS * 2.
-                                // style=format!(
-                                //     "transform: scale(0.6); transform-origin: {ox}px {ox}px;",
-                                // )
                             />
-                            // <circle
-                            // class="rotator"
-                            // style=format!("transform-origin: {ox}px {oy}px;")
-                            // fill=lan.color
-                            // cx=IMAGE_RADIUS
-                            // cy=IMAGE_RADIUS
-                            // r=IMAGE_RADIUS
-                            // />
-                            <circle fill="black" cx=*ox cy=*oy r=10 />
                         </g>
                     }
                 })
