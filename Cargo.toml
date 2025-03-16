@@ -4,12 +4,14 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+ditherrific = { git = "https://github.com/MangioneAndrea/ditherrific", version = "0.1.0", default-features = false, features = ["web"] }
 leptos = { version = "0.7.7", features = ["csr"] }
 leptos_meta = "0.7.7"
 leptos_router = "0.7.7"
 strum = { version = "0.27.1", features = ["strum_macros"] }
 strum_macros = "0.27.1"
 stylers = "0.3.2"
+web-sys = { version = "0.3.77", features = ["CanvasRenderingContext2d", "File", "FileList", "ImageData"] }
 
 [package.metadata.leptos]
 # The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name   

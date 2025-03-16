@@ -15,12 +15,14 @@ dependencies = [
 name = "andrea_mangione_dev"
 version = "0.1.0"
 dependencies = [
+ "ditherrific",
  "leptos",
  "leptos_meta",
  "leptos_router",
  "strum",
  "strum_macros",
  "stylers",
+ "web-sys",
 ]
 
 [[package]]
@@ -248,6 +250,16 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "ditherrific"
+version = "0.1.0"
+source = "git+https://github.com/MangioneAndrea/ditherrific#62a484773809dd8f8ec6a8843423a66d50050083"
+dependencies = [
+ "js-sys",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
