@@ -1,28 +1,8 @@
 {
-  "name": "@example/basics",
-  "type": "module",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev --host",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/svelte": "^5.6.0",
-    "@astrojs/tailwind": "^5.1.0",
-    "@vitejs/plugin-basic-ssl": "^1.1.0",
-    "astro": "^4.11.3",
-    "prismjs": "^1.29.0",
-    "svelte": "4.2.18",
-    "tailwindcss": "^3.0.24"
-  },
   "devDependencies": {
-    "prettier": "^3.3.2",
-    "prettier-plugin-astro": "^0.14.0",
-    "prettier-plugin-svelte": "^3.2.2",
-    "svelte-preprocess": "6.0.1"
+    "autoprefixer": "^10.4.20",
+    "daisyui": "^5.0.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
   }
 }
