@@ -73,7 +73,7 @@ pub fn ditherrific() -> impl IntoView {
         let blob = Blob::from(file);
 
         let as_url = Url::create_object_url_with_blob(&blob).map_err(|_|"Failed to create url from blob")?;
-        image_original.get().ok_or("Couldn't get original image from node")?.set_src(&as_url.as_str());
+        image_original.get().ok_or("Couldn't get original image from node")?.set_src(as_url.as_str());
 
 
         Ok(())
