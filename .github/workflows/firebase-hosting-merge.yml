@@ -20,10 +20,8 @@ jobs:
       - name: lint
         run: cargo clippy & cargo fmt
 
-
       - name: Download and install tailwindcss binary
-        run: npm install -D tailwindcss && npx tailwindcss -i <INPUT/PATH.css> -o <OUTPUT/PATH.css>  # run tailwind
-
+        run: npm install
 
       - name: Download and install Trunk binary
         run: wget -qO- https://github.com/trunk-rs/trunk/releases/download/v0.18.4/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
