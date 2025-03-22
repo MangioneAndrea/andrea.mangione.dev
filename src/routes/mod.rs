@@ -1,4 +1,4 @@
-use leptos::prelude::Get;
+use leptos::prelude::*;
 use leptos::{component, view, IntoView};
 
 mod blog;
@@ -38,9 +38,11 @@ impl Routes {
 #[component]
 pub fn routes_slot() -> impl IntoView {
     view! {
-        <Routes fallback=|| "404">
-            <Route path=path!("") view=Home />
-            <Route path=path!("/blog") view=Blog />
-        </Routes>
+        <div class="max-w-[60rem] mx-auto">
+            <Routes fallback=|| "404">
+                <Route path=path!("") view=Home />
+                <Route path=path!("/blog") view=Blog />
+            </Routes>
+        </div>
     }
 }

@@ -16,7 +16,7 @@ fn app() -> impl IntoView {
     view! {
         <Router>
             <Topbar />
-            <RoutesSlot/>
+            <RoutesSlot />
         </Router>
     }
 }

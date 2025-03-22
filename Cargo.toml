@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-ditherrific = { git = "https://github.com/MangioneAndrea/ditherrific", version = "0.1.0", default-features = false, features = ["web"] }
+ditherrific = { git = "https://github.com/MangioneAndrea/ditherrific", version = "0.1.0", default-features = false, features = ["web", "strum"] }
 leptos = { version = "0.7.7", features = ["csr"] }
 leptos_meta = "0.7.7"
 leptos_router = "0.7.7"
