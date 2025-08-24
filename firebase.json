@@ -8,10 +8,10 @@
       "**/src/**"
     ],
     "rewrites": [
-      {
-        "source": "**",
-        "destination": "/"
-      }
+	{
+	  "source": "/**",
+	  "dynamicLinks": true
+	}
     ]
   }
 }
