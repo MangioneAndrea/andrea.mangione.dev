@@ -16,6 +16,7 @@ use strum_macros::EnumIter;
 pub enum Routes {
     Home,
     Blog,
+    NotFound,
 }
 
 impl Routes {
@@ -23,6 +24,7 @@ impl Routes {
         match self {
             Self::Home => "/",
             Self::Blog => "/blog",
+            Self::NotFound => "/404",
         }
     }
 
@@ -30,7 +32,8 @@ impl Routes {
         let p = use_location().pathname.get();
         match p.as_str() {
             "/blog" => Self::Blog,
-            _ => Self::Home,
+            "/" | "" | "index.html" => Self::Home,
+            _ => Self::NotFound,
         }
     }
 }
