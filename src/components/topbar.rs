@@ -8,9 +8,10 @@ pub fn image_link(
     link: &'static str,
     text: &'static str,
     #[prop(default = false)] with_text: bool,
+    #[prop(default = "_blank")] target: &'static str,
 ) -> impl IntoView {
     view! {
-        <a href=link target="_blank">
+        <a href=link target=target>
             <img class=if with_text { "w-4" } else { "w-8" } src=image alt=text />
             {if with_text { text } else { "" }}
         </a>
@@ -57,6 +58,7 @@ pub fn topbar() -> impl IntoView {
                                 text="Blog"
                                 image="/assets/icons/blog.svg"
                                 with_text=true
+                                target="_self"
                             />
                         </li>
                         <li>

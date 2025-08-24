@@ -42,6 +42,7 @@ pub fn routes_slot() -> impl IntoView {
             <Routes fallback=|| "404">
                 <Route path=path!("") view=Home />
                 <Route path=path!("/blog") view=Blog />
+                <Route path=path!("/*any") view=|| view! { <h1>"Not Found"</h1> } />
             </Routes>
         </div>
     }
